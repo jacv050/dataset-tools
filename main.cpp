@@ -14,10 +14,10 @@
 const std::string window_name = "SubstractImgGrabcutGUI";
 
 //Trackbar size
-int openingSize;
-int closingSize;
+int openingSize,closingSize,erodeSize, dilateSize;
 cv::Mat1b imgClose, imgOpen, oriDiff;
 cv::Mat mObject;
+cv::Mat1b background, foreground;
 cv::Mat1b mask_fgpf;
 cv::Mat1b grabCutMask;
 std::vector<int> compression_params;
@@ -25,12 +25,16 @@ bool maskApplied;
 
 const int KOPENINGSIZE = 5;
 const int KCLOSINGSIZE = 51;
+const int KERODESIZE = 31;
+const int KDILATESIZE = 31;
 
 void Morphology_OpeningClean( int, void* );
 void Morphology_ClosingForm( int, void* );
 void ApplyGrabcut();
 void ApplyMask();
 void SaveMaskApplied(const std::string&);
+void MaskForeground(int, void*);
+void MaskBackground(int, void*);
 
 bool parse_command_line_options(boost::program_options::variables_map &variables_map, const int &argc, char **argv){
 
@@ -112,15 +116,22 @@ int main(int argc, char **argv){
 
 	openingSize = KOPENINGSIZE;
 	closingSize = KCLOSINGSIZE;
+	erodeSize = KERODESIZE;
+	dilateSize = KDILATESIZE;
 
 	cv::resizeWindow(window_name, mObject.cols/winRatio, mObject.rows/winRatio);
 	//Apply morphology operation. Opening to get object  //Size odd 2n+1
 	cv::createTrackbar("Opening to get object. Size: ", window_name, &openingSize, 10, Morphology_OpeningClean);
 	cv::createTrackbar("Closing to clean image. Size: ", window_name, &closingSize, 100, Morphology_ClosingForm);
+	cv::createTrackbar("Background morphology dilate. Size: ", window_name, &dilateSize, 100, MaskBackground);
+	cv::createTrackbar("Foreground morphology erode. Size: ", window_name, &erodeSize, 100, MaskForeground);
 
 	//Defualt values
 	Morphology_OpeningClean(openingSize,0);
 	Morphology_ClosingForm(closingSize,0);
+	MaskBackground(0,0);
+	MaskForeground(0,0);
+	cv::imshow(window_name, imgClose);
 
 	std::cout << "Press 's' to save the mask of image with the name of '--outputimage'" << std::endl;
 	std::cout << "Press 'g' to apply grabcut" << std::endl;
@@ -146,7 +157,38 @@ int main(int argc, char **argv){
 	return 1;
 }
 
+void MaskBackground(int, void*){
+	if(dilateSize==0){
+		std::cout << "0 is not valid" << std::endl;
+		return;
+	}
+	//Mask background
+	cv::Mat element3 = cv::getStructuringElement(2, cv::Size(dilateSize, dilateSize), cv::Point(ceil(dilateSize/2), ceil(dilateSize/2)));
+	cv::Mat backgroundApplied;
+	cv::dilate(imgClose, background, element3);
+	background = 255 - background;
+	mObject.copyTo(backgroundApplied, background);
+	cv::imshow(window_name, backgroundApplied);
+}
+
+void MaskForeground(int, void*){
+	if(erodeSize==0){
+		std::cout << "0 is not valid" << std::endl;
+		return;
+	}
+	cv::Mat element3 = cv::getStructuringElement(2, cv::Size(erodeSize, erodeSize), cv::Point(ceil(erodeSize/2), ceil(erodeSize/2)));
+	//Mask foreground
+	cv::Mat foregroundApplied;
+	cv::erode(imgClose, foreground, element3);
+	mObject.copyTo(foregroundApplied, foreground);
+	cv::imshow(window_name, foregroundApplied);
+}
+
 void Morphology_OpeningClean( int, void* ){
+	if(openingSize==0){
+		std::cout << "0 is not valid" << std::endl;
+		return;
+	}
 	cv::Mat element1 = cv::getStructuringElement(2, cv::Size(openingSize, openingSize),
 			cv::Point(ceil(openingSize/2), ceil(openingSize/2)));
 	morphologyEx(oriDiff, imgOpen, 2, element1); //Opening to clean noise
@@ -155,6 +197,10 @@ void Morphology_OpeningClean( int, void* ){
 }
 
 void Morphology_ClosingForm( int, void* ){
+	if(closingSize==0){
+		std::cout << "0 is not valid" << std::endl;
+		return;
+	}
 	cv::Mat element2 = cv::getStructuringElement(2, cv::Size(closingSize, closingSize),
 			cv::Point(ceil(closingSize/2), ceil(closingSize/2)));
 	morphologyEx(imgOpen, imgClose, 3, element2); //Closing
@@ -167,15 +213,9 @@ void ApplyGrabcut(){
 	markers.setTo(cv::GC_PR_FGD);
 
 	//Mask background
-	cv::Mat element3 = cv::getStructuringElement(2, cv::Size(31, 31), cv::Point(16, 16));
-	cv::Mat1b background;
-	cv::dilate(imgClose, background, element3);
-	background = 255 - background;
 	markers.setTo(cv::GC_BGD, background);
 
 	//Mask foreground
-	cv::Mat1b foreground;
-	cv::erode(imgClose, foreground, element3);
 	markers.setTo(cv::GC_FGD, foreground);
 
 	//Apply grabcut
