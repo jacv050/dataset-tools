@@ -80,9 +80,6 @@ int main(int argc, char **argv){
 		return 1;
 	}
 
-	/// Create window
-	cv::namedWindow(window_name, CV_WINDOW_NORMAL | CV_WINDOW_OPENGL);
-
 	//General params
 	std::string sImageCut = "imagecut.jpg";
 	std::string sBackground = variablesMap[PARAM_BACKGROUND].as<std::string>();
@@ -119,6 +116,8 @@ int main(int argc, char **argv){
 	erodeSize = KERODESIZE;
 	dilateSize = KDILATESIZE;
 
+	/// Create window
+	cv::namedWindow(window_name, CV_WINDOW_NORMAL | CV_WINDOW_OPENGL);
 	cv::resizeWindow(window_name, mObject.cols/winRatio, mObject.rows/winRatio);
 	//Apply morphology operation. Opening to get object  //Size odd 2n+1
 	cv::createTrackbar("Opening to get object. Size: ", window_name, &openingSize, 10, Morphology_OpeningClean);
