@@ -10,6 +10,11 @@
 #define PARAM_OUTPUTIMAGE "outputimage"
 #define PARAM_GAUSSIAN_ITERATIONS "gaussianiterations"
 #define PARAM_WINDOW_RATIO "windowratio"
+#define PARAM_OPENING_SIZE "openingsize"
+#define PARAM_CLOSING_SIZE "closingsize"
+#define PARAM_ERODE_SIZE "erodesize"
+#define PARAM_DILATE_SIZE "dilatesize"
+#define PARAM_PROBABLY_FOREGROUND "prbfgb"
 
 const std::string window_name = "SubstractImgGrabcutGUI";
 
@@ -22,7 +27,9 @@ cv::Mat1b mask_fgpf;
 cv::Mat1b grabCutMask;
 std::vector<int> compression_params;
 bool maskApplied;
+bool prbfgb;
 
+//Imagenes 640x480
 const int KOPENINGSIZE = 5;
 const int KCLOSINGSIZE = 51;
 const int KERODESIZE = 31;
@@ -46,6 +53,11 @@ bool parse_command_line_options(boost::program_options::variables_map &variables
 			(PARAM_GAUSSIAN_ITERATIONS, boost::program_options::value<int>()->default_value(5),
 					"How many times apply gaussian filter")
 			(PARAM_WINDOW_RATIO, boost::program_options::value<int>()->default_value(2), "Ratio of window in first charge")
+			(PARAM_OPENING_SIZE, boost::program_options::value<int>()->default_value(KOPENINGSIZE), "Opening to clean mask")
+			(PARAM_CLOSING_SIZE, boost::program_options::value<int>()->default_value(KCLOSINGSIZE), "Closing to close figure")
+			(PARAM_ERODE_SIZE, boost::program_options::value<int>()->default_value(KERODESIZE), "Erode to get foreground of grabcut")
+			(PARAM_DILATE_SIZE, boost::program_options::value<int>()->default_value(KDILATESIZE), "Dilate to get background of grabcut")
+			(PARAM_PROBABLY_FOREGROUND, boost::program_options::value<bool>()->default_value(true), "Base mask of grabcut. 1 = Probably foreground and 0 = Probably background")
 			(PARAM_BACKGROUND, boost::program_options::value<std::string>()->required(), "Image background")
 			(PARAM_OBJECT, boost::program_options::value<std::string>()->required(), "Object to substract")
 			(PARAM_OUTPUTIMAGE, boost::program_options::value<std::string>()->default_value("finalimage.png"),
@@ -87,6 +99,11 @@ int main(int argc, char **argv){
 	std::string sOutputimage = variablesMap[PARAM_OUTPUTIMAGE].as<std::string>();
 	int gaussianIterations = variablesMap[PARAM_GAUSSIAN_ITERATIONS].as<int>();
 	int winRatio = variablesMap[PARAM_WINDOW_RATIO].as<int>();
+	openingSize = variablesMap[PARAM_OPENING_SIZE].as<int>();
+	closingSize = variablesMap[PARAM_CLOSING_SIZE].as<int>();
+	erodeSize = variablesMap[PARAM_ERODE_SIZE].as<int>();
+	dilateSize = variablesMap[PARAM_DILATE_SIZE].as<int>();
+	prbfgb =variablesMap[PARAM_PROBABLY_FOREGROUND].as<bool>();
 
 	maskApplied=false;
 	mObject = cv::imread(sObject);
@@ -111,19 +128,14 @@ int main(int argc, char **argv){
 	//Convert image to B&W
 	cv::threshold(oriDiff, oriDiff, 25, 255, CV_THRESH_BINARY);
 
-	openingSize = KOPENINGSIZE;
-	closingSize = KCLOSINGSIZE;
-	erodeSize = KERODESIZE;
-	dilateSize = KDILATESIZE;
-
 	/// Create window
 	cv::namedWindow(window_name, CV_WINDOW_NORMAL | CV_WINDOW_OPENGL);
 	cv::resizeWindow(window_name, mObject.cols/winRatio, mObject.rows/winRatio);
 	//Apply morphology operation. Opening to get object  //Size odd 2n+1
-	cv::createTrackbar("Opening to get object. Size: ", window_name, &openingSize, 10, Morphology_OpeningClean);
-	cv::createTrackbar("Closing to clean image. Size: ", window_name, &closingSize, 100, Morphology_ClosingForm);
-	cv::createTrackbar("Background morphology dilate. Size: ", window_name, &dilateSize, 100, MaskBackground);
-	cv::createTrackbar("Foreground morphology erode. Size: ", window_name, &erodeSize, 100, MaskForeground);
+	cv::createTrackbar("Opening to get object. Size: ", window_name, &openingSize, 100, Morphology_OpeningClean);
+	cv::createTrackbar("Closing to clean image. Size: ", window_name, &closingSize, 200, Morphology_ClosingForm);
+	cv::createTrackbar("Background morphology dilate. Size: ", window_name, &dilateSize, 300, MaskBackground);
+	cv::createTrackbar("Foreground morphology erode. Size: ", window_name, &erodeSize, 200, MaskForeground);
 
 	//Defualt values
 	Morphology_OpeningClean(openingSize,0);
@@ -139,8 +151,9 @@ int main(int argc, char **argv){
 	char c;
 	while((c=cv::waitKey(0))!='q'){
 		if(c=='g' || c=='G'){
-			std::cout << "Grabcut applied" << std::endl;
+			std::cout << "Applying Grabcut..." << std::endl;
 			ApplyGrabcut();
+			std::cout << "Grabcut applied" << std::endl;
 		}else if(c=='s' || c=='S'){
 			std::cout << "Mask saved in: " << sOutputimage << std::endl;
 			cv::imwrite(sOutputimage, grabCutMask, compression_params);
@@ -209,7 +222,10 @@ void Morphology_ClosingForm( int, void* ){
 void ApplyGrabcut(){
 	//Mask
 	cv::Mat1b markers(imgClose.rows, imgClose.cols);
-	markers.setTo(cv::GC_PR_FGD);
+	if(prbfgb)
+		markers.setTo(cv::GC_PR_FGD);
+	else
+		markers.setTo(cv::GC_PR_BGD);
 
 	//Mask background
 	markers.setTo(cv::GC_BGD, background);
