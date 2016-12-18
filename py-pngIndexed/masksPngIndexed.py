@@ -6,7 +6,7 @@ def main(argv):
     arguments = len(argv)
     output = ""
     if arguments < 2 | arguments > 3:
-        print "You must introduce the pngIndexed like argument. And optionally the output "
+        print "sript png_indexed [outputroute=""]"
         sys.exit(0)
 
     if arguments == 3:
