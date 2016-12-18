@@ -60,11 +60,11 @@ bool parse_command_line_options(boost::program_options::variables_map &variables
 			(PARAM_CLOSING_SIZE, boost::program_options::value<int>()->default_value(KCLOSINGSIZE), "Closing to close figure")
 			(PARAM_ERODE_SIZE, boost::program_options::value<int>()->default_value(KERODESIZE), "Erode to get foreground of grabcut")
 			(PARAM_DILATE_SIZE, boost::program_options::value<int>()->default_value(KDILATESIZE), "Dilate to get background of grabcut")
-			(PARAM_PROBABLY_FOREGROUND, boost::program_options::value<bool>()->default_value(true), "Base mask of grabcut. 1 = Probably foreground and 0 = Probably background")
+			(PARAM_PROBABLY_FOREGROUND, boost::program_options::value<bool>()->default_value(false), "Base mask of grabcut. 1 = Probably foreground and 0 = Probably background")
 			(PARAM_BACKGROUND, boost::program_options::value<std::string>()->required(), "Image background")
 			(PARAM_THRESHOLD, boost::program_options::value<int>()->default_value(25), "Threshold tu substract object")
 			(PARAM_SUBSTRACT_MODE, boost::program_options::value<int>()->default_value(0), "0 = Substract with gray scale images. 1 = Susbtract in channel 'H' converting RGB images in HSV")
-			(PARAM_HSV_CHANNEL, boost::program_options::value<int>()->default_value(0), "Channel H=0,S=1,V=2 to substract object")
+			(PARAM_HSV_CHANNEL, boost::program_options::value<int>()->default_value(2), "Channel H=0,S=1,V=2 to substract object")
 			(PARAM_OBJECT, boost::program_options::value<std::string>()->required(), "Object to substract")
 			(PARAM_OUTPUTIMAGE, boost::program_options::value<std::string>()->default_value("finalimage.png"),
 					"Name of final image(If NOT apply mask, it will save mask file)");
