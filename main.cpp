@@ -135,8 +135,8 @@ int main(int argc, char **argv){
         std::vector<cv::Mat> chObject(hsvchannel);
         split(mBackgroundHSV, chBackground);
         split(mObjectHSV, chObject);
-        mBackgroundBlured = chBackground[2];
-        mObjectBlured = chObject[2];
+        mBackgroundBlured = chBackground[hsvchannel];
+        mObjectBlured = chObject[hsvchannel];
     }
 
 	//Apply gaussian filter to reduce noise
