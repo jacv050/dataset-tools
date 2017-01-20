@@ -254,6 +254,7 @@ void Morphology_ClosingForm( int, void* ){
 
 void ApplyGrabcut(){
 	//Mask
+	grabCutMask = cv::Mat1b::zeros(imgClose.rows, imgClose.cols);
 	cv::Mat1b markers(imgClose.rows, imgClose.cols);
 	if(prbfgb)
 		markers.setTo(cv::GC_PR_FGD);
