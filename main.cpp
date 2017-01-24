@@ -15,6 +15,9 @@
 #define PARAM_ERODE_SIZE "erodesize"
 #define PARAM_DILATE_SIZE "dilatesize"
 #define PARAM_PROBABLY_FOREGROUND "prbfgb"
+#define PARAM_THRESHOLD "threshold"
+#define PARAM_SUBSTRACT_MODE "substractmode"
+#define PARAM_HSV_CHANNEL "hsvchannel"
 
 const std::string window_name = "SubstractImgGrabcutGUI";
 
@@ -57,8 +60,11 @@ bool parse_command_line_options(boost::program_options::variables_map &variables
 			(PARAM_CLOSING_SIZE, boost::program_options::value<int>()->default_value(KCLOSINGSIZE), "Closing to close figure")
 			(PARAM_ERODE_SIZE, boost::program_options::value<int>()->default_value(KERODESIZE), "Erode to get foreground of grabcut")
 			(PARAM_DILATE_SIZE, boost::program_options::value<int>()->default_value(KDILATESIZE), "Dilate to get background of grabcut")
-			(PARAM_PROBABLY_FOREGROUND, boost::program_options::value<bool>()->default_value(true), "Base mask of grabcut. 1 = Probably foreground and 0 = Probably background")
+			(PARAM_PROBABLY_FOREGROUND, boost::program_options::value<bool>()->default_value(false), "Base mask of grabcut. 1 = Probably foreground and 0 = Probably background")
 			(PARAM_BACKGROUND, boost::program_options::value<std::string>()->required(), "Image background")
+			(PARAM_THRESHOLD, boost::program_options::value<int>()->default_value(25), "Threshold tu substract object")
+			(PARAM_SUBSTRACT_MODE, boost::program_options::value<int>()->default_value(0), "0 = Substract with gray scale images. 1 = Susbtract in channel 'H' converting RGB images in HSV")
+			(PARAM_HSV_CHANNEL, boost::program_options::value<int>()->default_value(2), "Channel H=0,S=1,V=2 to substract object")
 			(PARAM_OBJECT, boost::program_options::value<std::string>()->required(), "Object to substract")
 			(PARAM_OUTPUTIMAGE, boost::program_options::value<std::string>()->default_value("finalimage.png"),
 					"Name of final image(If NOT apply mask, it will save mask file)");
@@ -104,18 +110,34 @@ int main(int argc, char **argv){
 	erodeSize = variablesMap[PARAM_ERODE_SIZE].as<int>();
 	dilateSize = variablesMap[PARAM_DILATE_SIZE].as<int>();
 	prbfgb =variablesMap[PARAM_PROBABLY_FOREGROUND].as<bool>();
+	int threshold =variablesMap[PARAM_THRESHOLD].as<int>();
+    int substractmode = variablesMap[PARAM_SUBSTRACT_MODE].as<int>();
+    int hsvchannel = variablesMap[PARAM_HSV_CHANNEL].as<int>();
 
 	maskApplied=false;
 	mObject = cv::imread(sObject);
 	cv::Mat mBackground = cv::imread(sBackground);
 	cv::Size initSize = mObject.size();
 
-	cv::Mat1b mBackgroundBlured;
-	cv::Mat1b mObjectBlured;
+	cv::Mat mBackgroundBlured;
+	cv::Mat mObjectBlured;
 
-	//Convertimos a escala de grises
-	cv::cvtColor(mBackground, mBackgroundBlured, CV_BGR2GRAY);
-	cv::cvtColor(mObject, mObjectBlured, CV_BGR2GRAY);
+	//Convertimos a escala de grises ***Tests in gray scale***
+    if(substractmode == 0){
+    	cv::cvtColor(mBackground, mBackgroundBlured, CV_BGR2GRAY);
+	    cv::cvtColor(mObject, mObjectBlured, CV_BGR2GRAY);
+    }else if(substractmode == 1){
+        //Covert to HSV and extract PARAM_HSV_CHANNEL channel
+        cv::Mat mBackgroundHSV, mObjectHSV;
+        cv::cvtColor(mBackground, mBackgroundHSV, CV_BGR2HSV);
+        cv::cvtColor(mObject, mObjectHSV, CV_BGR2HSV);
+        std::vector<cv::Mat> chBackground(hsvchannel);
+        std::vector<cv::Mat> chObject(hsvchannel);
+        split(mBackgroundHSV, chBackground);
+        split(mObjectHSV, chObject);
+        mBackgroundBlured = chBackground[hsvchannel];
+        mObjectBlured = chObject[hsvchannel];
+    }
 
 	//Apply gaussian filter to reduce noise
 	for (int i = 0; i < gaussianIterations; ++i){
@@ -124,9 +146,17 @@ int main(int argc, char **argv){
 	}
 
 	//Extract the object
-	oriDiff = mBackgroundBlured - mObjectBlured;
 	//Convert image to B&W
-	cv::threshold(oriDiff, oriDiff, 25, 255, CV_THRESH_BINARY);
+	//oriDiff = mBackgroundBlured - mObjectBlured;
+    //DIFF option 1 - Good results
+    if(substractmode == 0){
+    	oriDiff = (mBackgroundBlured > (mObjectBlured+threshold));
+        oriDiff += oriDiff != (mBackgroundBlured < (mObjectBlured-threshold));
+    }else if(substractmode == 1){
+        oriDiff = (mBackgroundBlured > (mObjectBlured+threshold));
+        oriDiff += oriDiff != (mBackgroundBlured < (mObjectBlured-threshold));
+        //oriDiff = oriDiff == false;
+    }
 
 	/// Create window
 	cv::namedWindow(window_name, CV_WINDOW_NORMAL | CV_WINDOW_OPENGL);
@@ -216,11 +246,15 @@ void Morphology_ClosingForm( int, void* ){
 	cv::Mat element2 = cv::getStructuringElement(2, cv::Size(closingSize, closingSize),
 			cv::Point(ceil(closingSize/2), ceil(closingSize/2)));
 	morphologyEx(imgOpen, imgClose, 3, element2); //Closing
-	cv::imshow(window_name, imgClose);
+    cv::Mat auxMaskAplied;
+    mObject.copyTo(auxMaskAplied, imgClose);
+	//cv::imshow(window_name, imgClose);   
+    cv::imshow(window_name, auxMaskAplied);
 }
 
 void ApplyGrabcut(){
 	//Mask
+	grabCutMask = cv::Mat1b::zeros(imgClose.rows, imgClose.cols);
 	cv::Mat1b markers(imgClose.rows, imgClose.cols);
 	if(prbfgb)
 		markers.setTo(cv::GC_PR_FGD);
