@@ -1,0 +1,4 @@
+applyMask.py		Apply mask in a original image
+indexPng.py		Get a png indexed with various png
+masksPngIndexed.py	Split masks in a pngIndexed
+indexPngDataset.py	Get a png indexed with index to dataset
