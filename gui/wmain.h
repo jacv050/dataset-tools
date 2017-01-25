@@ -12,12 +12,13 @@
 #include "ui_wmain.h"
 
 class wmain : public QWidget {
+	Q_OBJECT
 public:
-	wmain();
+	wmain(QWidget* parent);
 	virtual ~wmain();
 
 private:
-	Ui::DatasetTool ui;
+	Ui::DatasetTool *ui;
 };
 
 #endif /* WMAIN_H_ */

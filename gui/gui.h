@@ -10,6 +10,7 @@
 
 #include <qmainwindow.h>
 #include <qstackedwidget.h>
+#include "gui/wmain.h"
 
 class gui : public QMainWindow {
 	Q_OBJECT
@@ -17,8 +18,11 @@ public:
 	gui();
 	virtual ~gui();
 private:
-	QWidget *centralWidget;
-	QStackedWidget *stackedWidget;
+	QWidget *mCentralWidget;
+	QStackedWidget *mStackedWidget;
+
+	//Pages
+	wmain *mWmain;
 };
 
 #endif /* GUI_H_ */

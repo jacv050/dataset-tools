@@ -7,8 +7,10 @@
 
 #include <gui/wmain.h>
 
-wmain::wmain() {
-	ui.setupUi(this);
+wmain::wmain(QWidget* parent) :
+QWidget(parent),
+ui(new Ui::DatasetTool){
+	ui->setupUi(this);
 }
 
 wmain::~wmain() {
