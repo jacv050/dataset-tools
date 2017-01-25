@@ -5,15 +5,15 @@
  *      Author: john
  */
 
-#include "gui/pages/wmain.h"
+#include "gui/pages/mainPage.h"
 
-wmain::wmain(QWidget* parent) :
+mainPage::mainPage(QWidget* parent) :
 QWidget(parent),
 ui(new Ui::DatasetTool){
 	ui->setupUi(this);
 }
 
-wmain::~wmain() {
+mainPage::~mainPage() {
 
 }
 

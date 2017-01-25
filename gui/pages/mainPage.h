@@ -9,16 +9,16 @@
 #define WMAIN_H_
 
 #include <QtWidgets>
-#include "ui_wmain.h"
+#include "ui_mainPage.h"
 
 /**
  * Page to select the tool
  */
-class wmain : public QWidget {
+class mainPage : public QWidget {
 	Q_OBJECT
 public:
-	wmain(QWidget* parent = 0);
-	virtual ~wmain();
+	mainPage(QWidget* parent = 0);
+	virtual ~mainPage();
 
 private:
 	Ui::DatasetTool *ui;

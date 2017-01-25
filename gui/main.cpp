@@ -2,7 +2,7 @@
 #include "gui/gui.h"
 #include <qapplication.h>
 
-#include "gui/pages/wmain.h"
+#include "gui/pages/mainPage.h"
 
 int main(int argc, char* argv[]){
 
@@ -11,8 +11,8 @@ int main(int argc, char* argv[]){
 	gui mGui;
 
 	//Add pages
-	wmain *mWmain = new wmain();
-	mGui.addPage(mWmain);
+	mainPage *mMainPage = new mainPage();
+	mGui.addPage(mMainPage);
 
 	mGui.show();
 
