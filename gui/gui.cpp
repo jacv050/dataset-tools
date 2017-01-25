@@ -9,23 +9,28 @@
 #include <QtWidgets>
 
 gui::gui() {
+	resize(600, 400);
 	mCentralWidget = new QWidget(this);
 	mCentralWidget->setObjectName(QString::fromUtf8("centralWidget"));
 	mCentralWidget->setMinimumSize(QSize(0, 0));
-	//mCentralWidget->setStyleSheet(QString::fromUtf8("QWidget {\n background-color: #1abc9c;\n {\n background-color: #1abc9c;\n }"));
+	mCentralWidget->resize(600, 400);
 
 	mStackedWidget = new QStackedWidget(mCentralWidget);
 	mStackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-	mStackedWidget->setGeometry(QRect(20, 120, 1061, 620));
-	//Init pages
-	mWmain = new wmain(mStackedWidget);
-
-	//Add pages
-	mStackedWidget->addWidget(mWmain);
+	mStackedWidget->setGeometry(QRect(0, 0, 1061, 620));
 
 	setCentralWidget(mCentralWidget);
-	mStackedWidget->setCurrentIndex(10);
+	mStackedWidget->setCurrentIndex(KINITPAGE);
 	//QMetaObject::connectSlotsByName(this);
+}
+
+void gui::addPage(QWidget *page){
+	page->setParent(mStackedWidget);
+	mStackedWidget->addWidget(page);
+}
+
+QWidget* gui::getParentPages() const{
+	return mStackedWidget;
 }
 
 gui::~gui() {

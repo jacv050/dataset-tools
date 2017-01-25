@@ -14,7 +14,7 @@
 class wmain : public QWidget {
 	Q_OBJECT
 public:
-	wmain(QWidget* parent);
+	wmain(QWidget* parent = 0);
 	virtual ~wmain();
 
 private:

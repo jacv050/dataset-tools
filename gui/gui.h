@@ -10,19 +10,22 @@
 
 #include <qmainwindow.h>
 #include <qstackedwidget.h>
-#include "gui/wmain.h"
 
 class gui : public QMainWindow {
 	Q_OBJECT
 public:
 	gui();
+	void addPage(QWidget *);
+	QWidget* getParentPages() const;
+
 	virtual ~gui();
 private:
 	QWidget *mCentralWidget;
 	QStackedWidget *mStackedWidget;
 
-	//Pages
-	wmain *mWmain;
+	static const int KINITPAGE = 0;
+	static const int KINITWIDT = 600;
+	static const int KINITHEIGHT = 400;
 };
 
 #endif /* GUI_H_ */
