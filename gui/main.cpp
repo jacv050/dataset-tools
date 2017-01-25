@@ -2,7 +2,7 @@
 #include "gui/gui.h"
 #include <qapplication.h>
 
-#include "gui/wmain.h"
+#include "gui/pages/wmain.h"
 
 int main(int argc, char* argv[]){
 

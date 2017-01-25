@@ -5,7 +5,7 @@
  *      Author: john
  */
 
-#include <gui/wmain.h>
+#include "gui/pages/wmain.h"
 
 wmain::wmain(QWidget* parent) :
 QWidget(parent),

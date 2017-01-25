@@ -11,6 +11,9 @@
 #include <QtWidgets>
 #include "ui_wmain.h"
 
+/**
+ * Page to select the tool
+ */
 class wmain : public QWidget {
 	Q_OBJECT
 public:
