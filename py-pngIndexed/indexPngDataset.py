@@ -3,9 +3,9 @@ import numpy as np
 import sys
 
 dataset = {
-    'air_freshener': (1, [50, 0, 0]),
-    'banana': (2, [0, 50, 0]),
-    'big_dice': (3, [0, 0, 50]),
+    'air_freshener': (1, [10, 0, 0]),
+    'banana': (2, [0, 10, 0]),
+    'big_dice': (3, [0, 0, 10]),
     'blue_vase': (4, [20, 0, 0]),
     'chocolate_syrup': (5, [0, 20, 0]),
     'cocacola': (6, [0, 0, 20]),
