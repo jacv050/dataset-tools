@@ -8,11 +8,11 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp -march=native")
 FILE(GLOB GHEADERS "*.h*")
 FILE(GLOB GSOURCES "*.cpp")
 
+set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(Qt5Core)
 find_package(Qt5Widgets)
-find_package(QtGui)
 
 find_package( OpenCV REQUIRED )
 
