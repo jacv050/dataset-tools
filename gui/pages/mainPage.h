@@ -22,7 +22,7 @@ public:
 	virtual ~mainPage();
 
 private:
-	Ui::pageMain_DatasetTool *ui;
+	Ui::pageMain *ui;
 
 private slots:
 	void goSubstracToolPage();
