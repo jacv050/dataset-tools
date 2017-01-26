@@ -10,22 +10,31 @@
 
 #include <qmainwindow.h>
 #include <qstackedwidget.h>
+#include "gui/pages/mainPage.h"
 
 class gui : public QMainWindow {
 	Q_OBJECT
-public:
-	gui();
-	void addPage(QWidget *);
-	QWidget* getParentPages() const;
 
-	virtual ~gui();
+	friend class mainPage;
+public:
+	static void addPage(QWidget*);
+	static QWidget* getParentPages();
+	static void initClass();
+	static void show();
+
 private:
-	QWidget *mCentralWidget;
-	QStackedWidget *mStackedWidget;
+	//static gui *mGui;
+	static QMainWindow *mGui;
+	gui();
+	virtual ~gui();
+	static void goToPage(QWidget*);
+	static QWidget *mCentralWidget;
+	static QStackedWidget *mStackedWidget;
 
 	static const int KINITPAGE = 0;
 	static const int KINITWIDT = 600;
 	static const int KINITHEIGHT = 400;
+
 };
 
 #endif /* GUI_H_ */

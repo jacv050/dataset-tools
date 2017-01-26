@@ -9,11 +9,21 @@
 
 mainPage::mainPage(QWidget* parent) :
 QWidget(parent),
-ui(new Ui::DatasetTool){
+ui(new Ui::pageMain_DatasetTool){
 	ui->setupUi(this);
+	connect(ui->pb_substractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
+
 }
 
 mainPage::~mainPage() {
-
+	delete ui;
 }
 
+void mainPage::goSubstracToolPage(){
+	mainPage *page;
+	gui::goToPage(page);
+}
+
+void mainPage::goLabelToolPage(){
+
+}

@@ -8,13 +8,13 @@ int main(int argc, char* argv[]){
 
 	QApplication app(argc, argv);
 	//Main interface
-	gui mGui;
+	gui::initClass();
 
 	//Add pages
 	mainPage *mMainPage = new mainPage();
-	mGui.addPage(mMainPage);
+	gui::addPage(mMainPage);
 
-	mGui.show();
+	gui::show();
 
 	return app.exec();
 }

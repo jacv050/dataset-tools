@@ -10,6 +10,7 @@
 
 #include <QtWidgets>
 #include "ui_mainPage.h"
+#include "gui/gui.h"
 
 /**
  * Page to select the tool
@@ -21,7 +22,11 @@ public:
 	virtual ~mainPage();
 
 private:
-	Ui::DatasetTool *ui;
+	Ui::pageMain_DatasetTool *ui;
+
+private slots:
+	void goSubstracToolPage();
+	void goLabelToolPage();
 };
 
 #endif /* WMAIN_H_ */
