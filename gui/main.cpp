@@ -3,6 +3,7 @@
 #include <qapplication.h>
 
 #include "gui/pages/mainPage.h"
+#include "gui/pages/substractToolPage.h"
 
 int main(int argc, char* argv[]){
 
@@ -12,10 +13,18 @@ int main(int argc, char* argv[]){
 
 	//Add pages
 	mainPage *mMainPage = new mainPage();
+	substractToolPage *mSubstractToolPage = new substractToolPage();
+
 	gui::addPage(mMainPage);
+	gui::addPage(mSubstractToolPage);
 
 	gui::show();
+	int output = app.exec();
 
-	return app.exec();
+	gui::destroyClass();
+	delete mMainPage;
+	delete mSubstractToolPage;
+
+	return output;
 }
 

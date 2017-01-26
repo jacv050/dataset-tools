@@ -20,6 +20,7 @@ public:
 	static void addPage(QWidget*);
 	static QWidget* getParentPages();
 	static void initClass();
+	static void destroyClass();
 	static void show();
 
 private:
@@ -27,7 +28,7 @@ private:
 	static QMainWindow *mGui;
 	gui();
 	virtual ~gui();
-	static void goToPage(QWidget*);
+	static void goToPage(const std::string&);
 	static QWidget *mCentralWidget;
 	static QStackedWidget *mStackedWidget;
 

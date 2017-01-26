@@ -44,9 +44,16 @@ void gui::initClass(){
 	}
 }
 
-void gui::goToPage(QWidget* page){
+void gui::destroyClass(){
+	delete mGui;
+	delete mCentralWidget;
+	delete mStackedWidget;
+}
+
+void gui::goToPage(const std::string& page){
+	QString namePage(page.c_str());
 	for(int i=0; i<mStackedWidget->count(); ++i){
-		if(dynamic_cast<mainPage*>(page))
+		if(mStackedWidget->widget(i)->objectName() == namePage)
 			std::cout << i << std::endl;
 
 	}
