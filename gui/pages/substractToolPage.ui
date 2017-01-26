@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>pageSubstractTool</class>
- <widget class="QWidget" name="pageSubstractTool">
+ <class>substractToolPage</class>
+ <widget class="QWidget" name="substractToolPage">
   <property name="geometry">
    <rect>
     <x>0</x>

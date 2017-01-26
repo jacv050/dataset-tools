@@ -22,7 +22,7 @@ public slots:
 	void goMainPage();
 
 private:
-	Ui::pageSubstractTool *ui;
+	Ui::substractToolPage *ui;
 };
 
 #endif /* SUBSTRACTTOOLPAGE_H_ */

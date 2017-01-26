@@ -9,7 +9,7 @@
 
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
-ui(new Ui::pageSubstractTool){
+ui(new Ui::substractToolPage){
 	ui->setupUi(this);
 	connect(ui->pb_returnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 }
