@@ -20,11 +20,7 @@ int main(int argc, char* argv[]){
 
 	gui::show();
 	int output = app.exec();
-
-	gui::destroyClass();
-	delete mMainPage;
-	delete mSubstractToolPage;
-
+	gui::destroyClass();//The pages will be destroyed too
 	return output;
 }
 

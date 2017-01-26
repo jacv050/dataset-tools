@@ -45,9 +45,9 @@ void gui::initClass(){
 }
 
 void gui::destroyClass(){
-	delete mGui;
-	delete mCentralWidget;
-	delete mStackedWidget;
+	//delete mStackedWidget;
+	//delete mCentralWidget;
+	delete mGui;//Destroyin mGui the others wigets will be free too.
 }
 
 void gui::goToPage(const std::string& page){
