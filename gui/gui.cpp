@@ -54,7 +54,7 @@ void gui::goToPage(const std::string& page){
 	QString namePage(page.c_str());
 	for(int i=0; i<mStackedWidget->count(); ++i){
 		if(mStackedWidget->widget(i)->objectName() == namePage)
-			std::cout << i << std::endl;
+			mStackedWidget->setCurrentIndex(i);
 
 	}
 }

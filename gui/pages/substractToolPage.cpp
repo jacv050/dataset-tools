@@ -15,7 +15,7 @@ ui(new Ui::substractToolPage){
 }
 
 void substractToolPage::goMainPage(){
-
+	gui::goToPage("mainPage");
 }
 
 substractToolPage::~substractToolPage() {

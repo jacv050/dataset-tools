@@ -15,20 +15,20 @@
 class gui : public QMainWindow {
 	Q_OBJECT
 
-	friend class mainPage;
 public:
 	static void addPage(QWidget*);
 	static QWidget* getParentPages();
 	static void initClass();
 	static void destroyClass();
 	static void show();
+	static void goToPage(const std::string&);
 
 private:
 	//static gui *mGui;
 	static QMainWindow *mGui;
 	gui();
 	virtual ~gui();
-	static void goToPage(const std::string&);
+
 	static QWidget *mCentralWidget;
 	static QStackedWidget *mStackedWidget;
 
