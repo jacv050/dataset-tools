@@ -36,6 +36,8 @@ private:
 
 	QString mLastPageBackground;
 	QString mLastPageObject;
+
+	static const QString imageFormats;
 };
 
 #endif /* SUBSTRACTTOOLPAGE_H_ */

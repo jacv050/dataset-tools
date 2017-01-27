@@ -7,6 +7,8 @@
 
 #include <gui/pages/substractToolPage.h>
 
+const QString substractToolPage::imageFormats = tr("Images (*.png *.jpg)");
+
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
 ui(new Ui::substractToolPage){
@@ -29,7 +31,7 @@ void substractToolPage::setBackgroundImage(){
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
 			mLastPageBackground.toLocal8Bit().constData(),
-			tr("Images (*.png *.jpg)"));
+			imageFormats);
 	if(!fileName.isNull())
 		ui->txtBackground->setPlainText(fileName);
 }
@@ -38,7 +40,7 @@ void substractToolPage::setObjectImage(){
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
 			mLastPageObject.toLocal8Bit().constData(),
-			tr("Images (*.png *.jpg)"));
+			imageFormats);
 	if(!fileName.isNull())
 		ui->txtObject->setPlainText(fileName);
 }
