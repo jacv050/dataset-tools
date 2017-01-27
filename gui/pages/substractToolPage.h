@@ -34,7 +34,8 @@ public slots:
 private:
 	Ui::substractToolPage *ui;
 
-	QString mLastPage;
+	QString mLastPageBackground;
+	QString mLastPageObject;
 };
 
 #endif /* SUBSTRACTTOOLPAGE_H_ */

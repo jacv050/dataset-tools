@@ -28,14 +28,19 @@ substractToolPage::~substractToolPage() {
 void substractToolPage::setBackgroundImage(){
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
-			mLastPage.toLocal8Bit().constData(),
+			mLastPageBackground.toLocal8Bit().constData(),
 			tr("Images (*.png *.jpg)"));
 	if(!fileName.isNull())
 		ui->txtBackground->setPlainText(fileName);
 }
 
 void substractToolPage::setObjectImage(){
-
+	QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open File"),
+			mLastPageObject.toLocal8Bit().constData(),
+			tr("Images (*.png *.jpg)"));
+	if(!fileName.isNull())
+		ui->txtObject->setPlainText(fileName);
 }
 
 void substractToolPage::substractObject(){
