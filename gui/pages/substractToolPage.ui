@@ -157,6 +157,12 @@ Indicate the inital mask in GrabCut algorithm</string>
     <string>Checked substract object with one channel in HSV
 Uncheked substract object with images in gray scale</string>
    </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="tristate">
+    <bool>false</bool>
+   </property>
   </widget>
   <widget class="QSpinBox" name="sbHsvchannel">
    <property name="geometry">

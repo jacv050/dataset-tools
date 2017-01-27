@@ -75,7 +75,22 @@ void substractToolPage::substractObject(){
 		args << ui->txtBackground->text();
 		args << "--object";
 		args << ui->txtObject->text();
-		args << ui->
+		args << "--gaussianiterations";
+		args << ui->sbGaussianiterations->text();
+		args << "--windowratio";
+		args << ui->sbWindowratio->text();
+		args << "--threshold";
+		args << ui->sbThreshold->text();
+		if(ui->cbSubstractmode->isChecked()){
+			args << "--substractmode";
+			args << "1";
+			args << "--hsvchannel";
+			args << ui->sbHsvchannel->text();
+		}
+		if(ui->cbPrbfgb->isChecked()){
+			args << "--prbfgb";
+			args << "1";
+		}
 
 		//QDir::currentPath().append("/imagesubstract") //QDir::separator
 		QDir dir(".");
