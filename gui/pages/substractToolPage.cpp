@@ -58,7 +58,6 @@ void substractToolPage::readyOutputMsgProcess(){
 }
 
 void substractToolPage::substractObject(){
-	//imageSubstractProcess->start("nautilus", QStringList() << ".");
 	bool isBackgroundImage = true;
 	//Execute application to substract
 	if(ui->txtBackground->text().isEmpty() ||
@@ -68,6 +67,7 @@ void substractToolPage::substractObject(){
 		msgBox.setText("You must introduce the background and object images.");
 		msgBox.exec();
 	}else{
+		//Arguments
 		QStringList args;
 		args << "--background";
 		args << ui->txtBackground->text();
@@ -76,6 +76,7 @@ void substractToolPage::substractObject(){
 
 		//QDir::currentPath().append("/imagesubstract") //QDir::separator
 		QDir dir(".");
+		//Check if there is a process active and close it to reopen
 		if(mImageSubstractProcess->isOpen()){
 			mImageSubstractProcess->kill();
 			mImageSubstractProcess->waitForFinished();
