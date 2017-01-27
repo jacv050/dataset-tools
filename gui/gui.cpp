@@ -29,7 +29,9 @@ QWidget* gui::getParentPages(){
 void gui::initClass(){
 	if(mGui == NULL){
 		mGui = new QMainWindow();
-		mGui->resize(600, 400);
+		mGui->resize(560, 437);
+		mGui->setMinimumWidth(560);
+		mGui->setMinimumHeight(437);
 		mCentralWidget = new QWidget(mGui);
 		mCentralWidget->setObjectName(QString::fromUtf8("centralWidget"));
 		mCentralWidget->setMinimumSize(QSize(0, 0));
