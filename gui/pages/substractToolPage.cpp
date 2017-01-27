@@ -17,6 +17,7 @@ ui(new Ui::substractToolPage){
 	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
 	connect(ui->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
 	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
+	imageSubstractProcess = new QProcess(this);
 }
 
 void substractToolPage::goMainPage(){
@@ -50,6 +51,7 @@ void substractToolPage::setObjectImage(){
 }
 
 void substractToolPage::substractObject(){
+	//imageSubstractProcess->start("nautilus", QStringList() << ".");
 	bool isBackgroundImage = true;
 	//Execute application to substract
 	if(ui->txtBackground->toPlainText().isEmpty() ||
@@ -59,11 +61,22 @@ void substractToolPage::substractObject(){
 		msgBox.setText("You must introduce the background and object images.");
 		msgBox.exec();
 	}else{
-		QString command = "./imagesubstract --background ";
-		command.append(ui->txtBackground->toPlainText());
-		command.append(" --object ");
-		command.append(ui->txtObject->toPlainText());
-		system(command.toLocal8Bit().constData());
+		QStringList args;
+		args << "--background";
+		args << ui->txtBackground->toPlainText();
+		args << "--object";
+		args << ui->txtObject->toPlainText();
+
+		//QDir::currentPath().append("/imagesubstract") //QDir::separator
+		QDir dir(".");
+		imageSubstractProcess->start(dir.absoluteFilePath("imagesubstract"), args);
+		if (imageSubstractProcess->waitForStarted(-1)) {
+			while(imageSubstractProcess->waitForReadyRead(-1)) {
+				QString s = QString(imageSubstractProcess->readAllStandardOutput());
+				std::cout << s.toStdString();
+			}
+		}
+
 	}
 }
 
