@@ -13,11 +13,12 @@ substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
 ui(new Ui::substractToolPage){
 	ui->setupUi(this);
+	mImageSubstractProcess = new QProcess(this);
 	connect(ui->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
 	connect(ui->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
 	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
-	imageSubstractProcess = new QProcess(this);
+	connect(mImageSubstractProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 }
 
 void substractToolPage::goMainPage(){
@@ -50,6 +51,12 @@ void substractToolPage::setObjectImage(){
 	}
 }
 
+void substractToolPage::readyOutputMsgProcess(){
+	QString s = QString(mImageSubstractProcess->readAllStandardOutput());
+	//ui->txtOutputProcess->setPlainText(s);
+	ui->txtOutputProcess->appendPlainText(s);
+}
+
 void substractToolPage::substractObject(){
 	//imageSubstractProcess->start("nautilus", QStringList() << ".");
 	bool isBackgroundImage = true;
@@ -69,14 +76,12 @@ void substractToolPage::substractObject(){
 
 		//QDir::currentPath().append("/imagesubstract") //QDir::separator
 		QDir dir(".");
-		imageSubstractProcess->start(dir.absoluteFilePath("imagesubstract"), args);
-		if (imageSubstractProcess->waitForStarted(-1)) {
-			while(imageSubstractProcess->waitForReadyRead(-1)) {
-				QString s = QString(imageSubstractProcess->readAllStandardOutput());
-				std::cout << s.toStdString();
-			}
+		if(mImageSubstractProcess->isOpen()){
+			mImageSubstractProcess->kill();
+			mImageSubstractProcess->waitForFinished();
 		}
 
+		mImageSubstractProcess->start(dir.absoluteFilePath("imagesubstract"), args);
 	}
 }
 

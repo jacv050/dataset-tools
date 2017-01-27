@@ -34,11 +34,12 @@ public slots:
 	void setObjectImage();
 	//Button event to execute the tool to substract the image
 	void substractObject();
-	//
+	//Update message
+	void readyOutputMsgProcess();
 
 private:
 	Ui::substractToolPage *ui;
-	QProcess *imageSubstractProcess;
+	QProcess *mImageSubstractProcess;
 
 	QString mLastPageBackground;
 	QString mLastPageObject;

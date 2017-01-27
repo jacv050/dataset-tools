@@ -65,13 +65,13 @@
     <string>Object</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
+  <widget class="QPlainTextEdit" name="txtOutputProcess">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>130</y>
      <width>331</width>
-     <height>71</height>
+     <height>151</height>
     </rect>
    </property>
   </widget>
