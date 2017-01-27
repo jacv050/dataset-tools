@@ -20,6 +20,9 @@ public:
 
 public slots:
 	void goMainPage();
+	void setBackgroundImage();
+	void setObjectImage();
+	void substractObject();
 
 private:
 	Ui::substractToolPage *ui;

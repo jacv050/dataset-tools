@@ -11,7 +11,7 @@ mainPage::mainPage(QWidget* parent) :
 QWidget(parent),
 ui(new Ui::mainPage){
 	ui->setupUi(this);
-	connect(ui->pb_substractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
+	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
 }
 
 mainPage::~mainPage() {
