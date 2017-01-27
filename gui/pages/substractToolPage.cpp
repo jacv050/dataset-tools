@@ -44,6 +44,7 @@ void substractToolPage::setBackgroundImage(){
 }
 
 void substractToolPage::setObjectImage(){
+
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
 			mLastPageObject.toLocal8Bit().constData(),
@@ -82,10 +83,11 @@ void substractToolPage::substractObject(){
 	bool isBackgroundImage = true;
 	//Execute application to substract
 	if(ui->txtBackground->text().isEmpty() ||
-			ui->txtObject->text().isEmpty()){
+			ui->txtObject->text().isEmpty() ||
+			ui->txtMaskDestiny->text().isEmpty()){
 		//throw window error
 		QMessageBox msgBox(this);
-		msgBox.setText("You must introduce the background and object images.");
+		msgBox.setText("You must introduce the background image, object images and mask destiny.");
 		msgBox.exec();
 	}else{
 		//Arguments
