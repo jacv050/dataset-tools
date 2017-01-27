@@ -32,8 +32,10 @@ void substractToolPage::setBackgroundImage(){
 			tr("Open File"),
 			mLastPageBackground.toLocal8Bit().constData(),
 			imageFormats);
-	if(!fileName.isNull())
+	if(!fileName.isNull()){
+		mLastPageBackground = fileName;
 		ui->txtBackground->setPlainText(fileName);
+	}
 }
 
 void substractToolPage::setObjectImage(){
@@ -41,8 +43,10 @@ void substractToolPage::setObjectImage(){
 			tr("Open File"),
 			mLastPageObject.toLocal8Bit().constData(),
 			imageFormats);
-	if(!fileName.isNull())
+	if(!fileName.isNull()){
+		mLastPageObject = fileName;
 		ui->txtObject->setPlainText(fileName);
+	}
 }
 
 void substractToolPage::substractObject(){
