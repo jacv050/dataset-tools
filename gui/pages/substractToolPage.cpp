@@ -12,7 +12,9 @@ QWidget(parent),
 ui(new Ui::substractToolPage){
 	ui->setupUi(this);
 	connect(ui->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
-	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(substractObject()));
+	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
+	connect(ui->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
+	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
 }
 
 void substractToolPage::goMainPage(){
@@ -24,7 +26,12 @@ substractToolPage::~substractToolPage() {
 }
 
 void substractToolPage::setBackgroundImage(){
-
+	QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open File"),
+			mLastPage.toLocal8Bit().constData(),
+			tr("Images (*.png *.jpg)"));
+	if(!fileName.isNull())
+		ui->txtBackground->setPlainText(fileName);
 }
 
 void substractToolPage::setObjectImage(){
@@ -37,10 +44,9 @@ void substractToolPage::substractObject(){
 	if(ui->txtBackground->toPlainText().isEmpty() ||
 			ui->txtObject->toPlainText().isEmpty()){
 		//throw window error
-		QMessageBox msgBox;
+		QMessageBox msgBox(this);
 		msgBox.setText("You must introduce the background and object images.");
 		msgBox.exec();
-		isBackgroundImage = false;
 	}else{
 		QString command = "./imagesubstract --background ";
 		command.append(ui->txtBackground->toPlainText());
