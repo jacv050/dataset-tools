@@ -9,6 +9,8 @@
 #define SUBSTRACTTOOLPAGE_H_
 
 #include <QtWidgets>
+#include <QMessageBox>
+
 #include "ui_substractToolPage.h"
 #include "gui/gui.h"
 

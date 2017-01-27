@@ -37,6 +37,9 @@ void substractToolPage::substractObject(){
 	if(ui->txtBackground->toPlainText().isEmpty() ||
 			ui->txtObject->toPlainText().isEmpty()){
 		//throw window error
+		QMessageBox msgBox;
+		msgBox.setText("You must introduce the background and object images.");
+		msgBox.exec();
 		isBackgroundImage = false;
 	}else{
 		QString command = "./imagesubstract --background ";
