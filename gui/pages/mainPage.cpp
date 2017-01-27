@@ -9,13 +9,13 @@
 
 mainPage::mainPage(QWidget* parent) :
 QWidget(parent),
-ui(new Ui::mainPage){
-	ui->setupUi(this);
-	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
+mUi(new Ui::mainPage){
+	mUi->setupUi(this);
+	connect(mUi->pbSubstractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
 }
 
 mainPage::~mainPage() {
-	delete ui;
+	delete mUi;
 }
 
 void mainPage::goSubstracToolPage(){

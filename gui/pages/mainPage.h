@@ -22,7 +22,7 @@ public:
 	virtual ~mainPage();
 
 private:
-	Ui::mainPage *ui;
+	Ui::mainPage *mUi;
 
 private slots:
 	void goSubstracToolPage();

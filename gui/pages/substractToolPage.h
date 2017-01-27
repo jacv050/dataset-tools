@@ -40,14 +40,14 @@ public slots:
 	void readyOutputMsgProcess();
 
 private:
-	Ui::substractToolPage *ui;
+	Ui::substractToolPage *mUi;
 	QProcess *mImageSubstractProcess;
 
 	QString mLastPageBackground;
 	QString mLastPageObject;
 	QString mLastMaskDestiny;
 
-	static const QString imageFormats;
+	static const QString KIMAGEFORMATS;
 };
 
 #endif /* SUBSTRACTTOOLPAGE_H_ */

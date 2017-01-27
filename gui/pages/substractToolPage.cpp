@@ -7,22 +7,22 @@
 
 #include <gui/pages/substractToolPage.h>
 
-const QString substractToolPage::imageFormats = tr("Images (*.png *.jpg)");
+const QString substractToolPage::KIMAGEFORMATS = tr("Images (*.png *.jpg)");
 
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
-ui(new Ui::substractToolPage){
-	//mGui->setMinimumWidth(560);
-	//mGui->setMinimumHeight(437);
-	ui->setupUi(this);
+mUi(new Ui::substractToolPage){
+	//mGmUi->setMinimumWidth(560);
+	//mGmUi->setMinimumHeight(437);
+	mUi->setupUi(this);
 	mImageSubstractProcess = new QProcess(this);
 	mLastMaskDestiny = QDir::currentPath() + QDir::separator() + tr("finalimage.png");
-	ui->txtMaskDestiny->setText(mLastMaskDestiny);
-	connect(ui->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
-	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
-	connect(ui->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
-	connect(ui->pbMaskDestiny, SIGNAL(clicked()), this, SLOT(setMaskNameDestiny()));
-	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
+	mUi->txtMaskDestiny->setText(mLastMaskDestiny);
+	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
+	connect(mUi->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
+	connect(mUi->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
+	connect(mUi->pbMaskDestiny, SIGNAL(clicked()), this, SLOT(setMaskNameDestiny()));
+	connect(mUi->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
 	connect(mImageSubstractProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 }
 
@@ -31,17 +31,17 @@ void substractToolPage::goMainPage(){
 }
 
 substractToolPage::~substractToolPage() {
-	delete ui;
+	delete mUi;
 }
 
 void substractToolPage::setBackgroundImage(){
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
 			mLastPageBackground.toLocal8Bit().constData(),
-			imageFormats);
+			KIMAGEFORMATS);
 	if(!fileName.isNull()){
 		mLastPageBackground = fileName;
-		ui->txtBackground->setText(fileName);
+		mUi->txtBackground->setText(fileName);
 	}
 }
 
@@ -50,17 +50,17 @@ void substractToolPage::setObjectImage(){
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
 			mLastPageObject.toLocal8Bit().constData(),
-			imageFormats);
+			KIMAGEFORMATS);
 	if(!fileName.isNull()){
 		mLastPageObject = fileName;
-		ui->txtObject->setText(fileName);
+		mUi->txtObject->setText(fileName);
 	}
 }
 
 void substractToolPage::setMaskNameDestiny(){
 	QFileDialog dialog(this);
 	dialog.setFileMode(QFileDialog::AnyFile);
-	dialog.setNameFilter(tr("Images (*.png *.jpg)"));
+	dialog.setNameFilter(KIMAGEFORMATS);
 	dialog.setViewMode(QFileDialog::Detail);
 	if(!mLastMaskDestiny.isEmpty())
 		dialog.setDirectory(mLastMaskDestiny);
@@ -70,23 +70,23 @@ void substractToolPage::setMaskNameDestiny(){
 	    fileNames = dialog.selectedFiles();
 	    if(!fileNames.at(0).isNull()){
 	    	mLastMaskDestiny = fileNames.at(0);
-	    	ui->txtMaskDestiny->setText(fileNames.at(0));
+	    	mUi->txtMaskDestiny->setText(fileNames.at(0));
 		}
 	}
 }
 
 void substractToolPage::readyOutputMsgProcess(){
 	QString s = QString(mImageSubstractProcess->readAllStandardOutput());
-	//ui->txtOutputProcess->setPlainText(s);
-	ui->txtOutputProcess->appendPlainText(s);
+	//mUi->txtOutputProcess->setPlainText(s);
+	mUi->txtOutputProcess->appendPlainText(s);
 }
 
 void substractToolPage::substractObject(){
 	bool isBackgroundImage = true;
 	//Execute application to substract
-	if(ui->txtBackground->text().isEmpty() ||
-			ui->txtObject->text().isEmpty() ||
-			ui->txtMaskDestiny->text().isEmpty()){
+	if(mUi->txtBackground->text().isEmpty() ||
+			mUi->txtObject->text().isEmpty() ||
+			mUi->txtMaskDestiny->text().isEmpty()){
 		//throw window error
 		QMessageBox msgBox(this);
 		msgBox.setText("You must introduce the background image, object images and mask destiny.");
@@ -95,24 +95,24 @@ void substractToolPage::substractObject(){
 		//Arguments
 		QStringList args;
 		args << "--background";
-		args << ui->txtBackground->text();
+		args << mUi->txtBackground->text();
 		args << "--object";
-		args << ui->txtObject->text();
+		args << mUi->txtObject->text();
 		args << "--outputimage";
-		args << ui->txtMaskDestiny->text();
+		args << mUi->txtMaskDestiny->text();
 		args << "--gaussianiterations";
-		args << ui->sbGaussianiterations->text();
+		args << mUi->sbGaussianiterations->text();
 		args << "--windowratio";
-		args << ui->sbWindowratio->text();
+		args << mUi->sbWindowratio->text();
 		args << "--threshold";
-		args << ui->sbThreshold->text();
-		if(ui->cbSubstractmode->isChecked()){
+		args << mUi->sbThreshold->text();
+		if(mUi->cbSubstractmode->isChecked()){
 			args << "--substractmode";
 			args << "1";
 			args << "--hsvchannel";
-			args << ui->sbHsvchannel->text();
+			args << mUi->sbHsvchannel->text();
 		}
-		if(ui->cbPrbfgb->isChecked()){
+		if(mUi->cbPrbfgb->isChecked()){
 			args << "--prbfgb";
 			args << "1";
 		}
