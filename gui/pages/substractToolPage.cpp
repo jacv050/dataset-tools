@@ -16,6 +16,8 @@ ui(new Ui::substractToolPage){
 	//mGui->setMinimumHeight(437);
 	ui->setupUi(this);
 	mImageSubstractProcess = new QProcess(this);
+	mLastMaskDestiny = QDir::currentPath() + QDir::separator() + tr("finalimage.png");
+	ui->txtMaskDestiny->setText(mLastMaskDestiny);
 	connect(ui->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
 	connect(ui->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
@@ -96,6 +98,8 @@ void substractToolPage::substractObject(){
 		args << ui->txtBackground->text();
 		args << "--object";
 		args << ui->txtObject->text();
+		args << "--outputimage";
+		args << ui->txtMaskDestiny->text();
 		args << "--gaussianiterations";
 		args << ui->sbGaussianiterations->text();
 		args << "--windowratio";
