@@ -35,7 +35,7 @@ void substractToolPage::setBackgroundImage(){
 			imageFormats);
 	if(!fileName.isNull()){
 		mLastPageBackground = fileName;
-		ui->txtBackground->setPlainText(fileName);
+		ui->txtBackground->setText(fileName);
 	}
 }
 
@@ -46,7 +46,7 @@ void substractToolPage::setObjectImage(){
 			imageFormats);
 	if(!fileName.isNull()){
 		mLastPageObject = fileName;
-		ui->txtObject->setPlainText(fileName);
+		ui->txtObject->setText(fileName);
 	}
 }
 
@@ -54,8 +54,8 @@ void substractToolPage::substractObject(){
 	//imageSubstractProcess->start("nautilus", QStringList() << ".");
 	bool isBackgroundImage = true;
 	//Execute application to substract
-	if(ui->txtBackground->toPlainText().isEmpty() ||
-			ui->txtObject->toPlainText().isEmpty()){
+	if(ui->txtBackground->text().isEmpty() ||
+			ui->txtObject->text().isEmpty()){
 		//throw window error
 		QMessageBox msgBox(this);
 		msgBox.setText("You must introduce the background and object images.");
@@ -63,9 +63,9 @@ void substractToolPage::substractObject(){
 	}else{
 		QStringList args;
 		args << "--background";
-		args << ui->txtBackground->toPlainText();
+		args << ui->txtBackground->text();
 		args << "--object";
-		args << ui->txtObject->toPlainText();
+		args << ui->txtObject->text();
 
 		//QDir::currentPath().append("/imagesubstract") //QDir::separator
 		QDir dir(".");

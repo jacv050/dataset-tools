@@ -13,16 +13,11 @@
 #include <QFileDialog>
 #include <QProcess>
 
-#include <boost/iostreams/device/file_descriptor.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/process.hpp>
+#include <iostream>
 
 #include "ui_substractToolPage.h"
 #include "gui/gui.h"
 #include <vector>
-
-namespace bio = boost::iostreams;
-namespace bp = boost::process;
 
 class substractToolPage : public QWidget {
 	Q_OBJECT

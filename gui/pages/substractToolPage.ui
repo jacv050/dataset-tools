@@ -65,23 +65,33 @@
     <string>Object</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="txtObject">
+  <widget class="QPlainTextEdit" name="plainTextEdit">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>60</y>
-     <width>231</width>
-     <height>31</height>
+     <x>10</x>
+     <y>130</y>
+     <width>331</width>
+     <height>71</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="txtBackground">
+  <widget class="QLineEdit" name="txtBackground">
    <property name="geometry">
     <rect>
      <x>110</x>
      <y>20</y>
      <width>231</width>
-     <height>31</height>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtObject">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>60</y>
+     <width>231</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
