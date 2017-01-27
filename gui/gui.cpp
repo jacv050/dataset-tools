@@ -64,6 +64,5 @@ void gui::show(){
 }
 
 gui::~gui() {
-	// TODO Auto-generated destructor stub
 }
 

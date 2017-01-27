@@ -32,6 +32,8 @@ public slots:
 	void setBackgroundImage();
 	//Button event to set the object image
 	void setObjectImage();
+	//Button evet to set the mask name destiny
+	void setMaskNameDestiny();
 	//Button event to execute the tool to substract the image
 	void substractObject();
 	//Update message
@@ -43,6 +45,7 @@ private:
 
 	QString mLastPageBackground;
 	QString mLastPageObject;
+	QString mLastMaskDestiny;
 
 	static const QString imageFormats;
 };

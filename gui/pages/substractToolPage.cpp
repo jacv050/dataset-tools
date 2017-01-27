@@ -19,6 +19,7 @@ ui(new Ui::substractToolPage){
 	connect(ui->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(ui->pbBackground, SIGNAL(clicked()), this, SLOT(setBackgroundImage()));
 	connect(ui->pbObject, SIGNAL(clicked()), this, SLOT(setObjectImage()));
+	connect(ui->pbMaskDestiny, SIGNAL(clicked()), this, SLOT(setMaskNameDestiny()));
 	connect(ui->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
 	connect(mImageSubstractProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 }
@@ -50,6 +51,24 @@ void substractToolPage::setObjectImage(){
 	if(!fileName.isNull()){
 		mLastPageObject = fileName;
 		ui->txtObject->setText(fileName);
+	}
+}
+
+void substractToolPage::setMaskNameDestiny(){
+	QFileDialog dialog(this);
+	dialog.setFileMode(QFileDialog::AnyFile);
+	dialog.setNameFilter(tr("Images (*.png *.jpg)"));
+	dialog.setViewMode(QFileDialog::Detail);
+	if(!mLastMaskDestiny.isEmpty())
+		dialog.setDirectory(mLastMaskDestiny);
+
+	QStringList fileNames;
+	if (dialog.exec()){
+	    fileNames = dialog.selectedFiles();
+	    if(!fileNames.at(0).isNull()){
+	    	mLastMaskDestiny = fileNames.at(0);
+	    	ui->txtMaskDestiny->setText(fileNames.at(0));
+		}
 	}
 }
 
