@@ -12,6 +12,8 @@ const QString substractToolPage::imageFormats = tr("Images (*.png *.jpg)");
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
 ui(new Ui::substractToolPage){
+	//mGui->setMinimumWidth(560);
+	//mGui->setMinimumHeight(437);
 	ui->setupUi(this);
 	mImageSubstractProcess = new QProcess(this);
 	connect(ui->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
@@ -73,6 +75,7 @@ void substractToolPage::substractObject(){
 		args << ui->txtBackground->text();
 		args << "--object";
 		args << ui->txtObject->text();
+		args << ui->
 
 		//QDir::currentPath().append("/imagesubstract") //QDir::separator
 		QDir dir(".");
