@@ -13,7 +13,7 @@
   <property name="minimumSize">
    <size>
     <width>560</width>
-    <height>437</height>
+    <height>507</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -69,16 +69,6 @@
    </property>
    <property name="text">
     <string>Object</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="txtOutputProcess">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>340</y>
-     <width>541</width>
-     <height>151</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLineEdit" name="txtBackground">
@@ -271,6 +261,16 @@ Uncheked substract object with images in gray scale</string>
      <y>100</y>
      <width>441</width>
      <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="txtOutputProcess">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>328</y>
+     <width>541</width>
+     <height>171</height>
     </rect>
    </property>
   </widget>

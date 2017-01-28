@@ -28,12 +28,12 @@ QWidget* gui::getParentPages(){
 
 void gui::initClass(){
 	if(mGui == NULL){
-		mGui = new QMainWindow();
-		mGui->resize(560, 437);
+		//mGui = new QMainWindow();
+		mGui = new gui();
 		mCentralWidget = new QWidget(mGui);
 		mCentralWidget->setObjectName(QString::fromUtf8("centralWidget"));
 		mCentralWidget->setMinimumSize(QSize(0, 0));
-		mCentralWidget->resize(600, 400);
+		mCentralWidget->resize(100, 30);
 
 		mStackedWidget = new QStackedWidget(mCentralWidget);
 		mStackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
@@ -41,6 +41,9 @@ void gui::initClass(){
 
 		mGui->setCentralWidget(mCentralWidget);
 		mStackedWidget->setCurrentIndex(KINITPAGE);
+		//currentChanged(int)
+		connect(mStackedWidget, SIGNAL(currentChanged(int)), mGui, SLOT(indexChanged(int)));
+		//connect(mStackedWidget,SIGNAL(currentChanged(int)),this,indexChanged(int));
 	}
 }
 
@@ -55,8 +58,23 @@ void gui::goToPage(const std::string& page){
 	for(int i=0; i<mStackedWidget->count(); ++i){
 		if(mStackedWidget->widget(i)->objectName() == namePage)
 			mStackedWidget->setCurrentIndex(i);
-
 	}
+}
+
+void gui::indexChanged(int index){
+	mGui->setMinimumSize(mStackedWidget->currentWidget()->minimumSize());
+}
+
+void gui::setMinimumConstraint(int width, int height){
+	mGui->setMinimumSize(width, height);
+}
+
+void gui::setMaximumConstraint(int width, int height){
+	mGui->setMaximumSize(width, height);
+}
+
+void gui::resize(int width, int heihgt){
+	mGui->resize(width, heihgt);
 }
 
 void gui::show(){

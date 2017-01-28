@@ -22,6 +22,9 @@ public:
 	static void destroyClass();
 	static void show();
 	static void goToPage(const std::string&);
+	static void setMinimumConstraint(int width, int height);
+	static void setMaximumConstraint(int width, int height);
+	static void resize(int width, int heihgt);
 
 private:
 	//static gui *mGui;
@@ -35,6 +38,9 @@ private:
 	static const int KINITPAGE = 0;
 	static const int KINITWIDT = 600;
 	static const int KINITHEIGHT = 400;
+
+private slots:
+	void indexChanged(int);
 
 };
 
