@@ -176,6 +176,9 @@ Uncheked substract object with images in gray scale</string>
    <property name="maximum">
     <number>2</number>
    </property>
+   <property name="value">
+    <number>2</number>
+   </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">

@@ -48,6 +48,7 @@ private:
 	QString mLastMaskDestiny;
 
 	static const QString KIMAGEFORMATS;
+	static const QString KOUTPUTIMAGEFORMATS;
 };
 
 #endif /* SUBSTRACTTOOLPAGE_H_ */

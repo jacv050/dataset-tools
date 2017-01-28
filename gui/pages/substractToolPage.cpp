@@ -8,6 +8,7 @@
 #include <gui/pages/substractToolPage.h>
 
 const QString substractToolPage::KIMAGEFORMATS = tr("Images (*.png *.jpg)");
+const QString substractToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
 
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
@@ -60,7 +61,7 @@ void substractToolPage::setObjectImage(){
 void substractToolPage::setMaskNameDestiny(){
 	QFileDialog dialog(this);
 	dialog.setFileMode(QFileDialog::AnyFile);
-	dialog.setNameFilter(KIMAGEFORMATS);
+	dialog.setNameFilter(KOUTPUTIMAGEFORMATS);
 	dialog.setViewMode(QFileDialog::Detail);
 	if(!mLastMaskDestiny.isEmpty())
 		dialog.setDirectory(mLastMaskDestiny);
@@ -76,7 +77,7 @@ void substractToolPage::setMaskNameDestiny(){
 }
 
 void substractToolPage::readyOutputMsgProcess(){
-	QString s = QString(mImageSubstractProcess->readAllStandardOutput());
+	QString s = tr(mImageSubstractProcess->readAllStandardOutput());
 	//mUi->txtOutputProcess->setPlainText(s);
 	mUi->txtOutputProcess->appendPlainText(s);
 }
@@ -89,7 +90,7 @@ void substractToolPage::substractObject(){
 			mUi->txtMaskDestiny->text().isEmpty()){
 		//throw window error
 		QMessageBox msgBox(this);
-		msgBox.setText("You must introduce the background image, object images and mask destiny.");
+		msgBox.setText("You must introduce the background image, object image and mask destiny.");
 		msgBox.exec();
 	}else{
 		//Arguments
