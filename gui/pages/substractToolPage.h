@@ -38,6 +38,8 @@ public slots:
 	void substractObject();
 	//Update message
 	void readyOutputMsgProcess();
+	//Event checkbox substract mode
+	void substractModeChanged();
 
 private:
 	Ui::substractToolPage *mUi;
