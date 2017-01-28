@@ -16,7 +16,7 @@ mUi(new Ui::substractToolPage){
 	//mGmUi->setMinimumWidth(560);
 	//mGmUi->setMinimumHeight(437);
 	mUi->setupUi(this);
-	mUi->sbHsvchannel->setEnabled(false);
+	mUi->sbHsvchannel->setEnabled(mUi->cbSubstractmode->isChecked());
 	mImageSubstractProcess = new QProcess(this);
 	mLastMaskDestiny = QDir::currentPath() + QDir::separator() + tr("finalimage.png");
 	mUi->txtMaskDestiny->setText(mLastMaskDestiny);
@@ -38,7 +38,7 @@ substractToolPage::~substractToolPage() {
 }
 
 void substractToolPage::substractModeChanged(){
-	mUi->sbHsvchannel->setEnabled(!mUi->sbHsvchannel->isEnabled());
+	mUi->sbHsvchannel->setEnabled(mUi->cbSubstractmode->isChecked());
 }
 
 void substractToolPage::setBackgroundImage(){
