@@ -9,10 +9,12 @@
 #define LABELTOOLPAGE_H_
 
 #include "ui_labelToolPage.h"
+#include <QWidget>
 
-class labelToolPage {
+class labelToolPage : public QWidget{
+	Q_OBJECT
 public:
-	labelToolPage();
+	labelToolPage(QWidget *parent = 0);
 	virtual ~labelToolPage();
 
 private:

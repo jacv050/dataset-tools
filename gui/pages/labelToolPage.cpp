@@ -7,12 +7,12 @@
 
 #include <gui/pages/labelToolPage.h>
 
-labelToolPage::labelToolPage() {
-	// TODO Auto-generated constructor stub
+labelToolPage::labelToolPage(QWidget *parent) :
+QWidget(parent),
+mUi(new Ui::labelToolPage){
 
 }
 
 labelToolPage::~labelToolPage() {
-	// TODO Auto-generated destructor stub
 }
 
