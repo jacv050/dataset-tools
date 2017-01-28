@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>491</width>
-    <height>387</height>
+    <width>131</width>
+    <height>76</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>131</width>
+    <height>76</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>131</width>
+    <height>76</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>DatasetTool</string>
@@ -16,7 +28,7 @@
   <widget class="QPushButton" name="pbSubstractTool">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>10</y>
      <width>111</width>
      <height>27</height>
@@ -35,9 +47,9 @@
   <widget class="QPushButton" name="pbLabelTool">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>40</y>
-     <width>99</width>
+     <width>111</width>
      <height>27</height>
     </rect>
    </property>
