@@ -10,7 +10,12 @@
 labelToolPage::labelToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::labelToolPage){
+	mUi->setupUi(this);
+	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
+}
 
+void labelToolPage::goMainPage(){
+	gui::goToPage("mainPage");
 }
 
 labelToolPage::~labelToolPage() {

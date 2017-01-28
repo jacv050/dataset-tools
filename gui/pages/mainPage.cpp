@@ -12,6 +12,7 @@ QWidget(parent),
 mUi(new Ui::mainPage){
 	mUi->setupUi(this);
 	connect(mUi->pbSubstractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
+	connect(mUi->pbLabelTool, SIGNAL(clicked()), this, SLOT(goLabelToolPage()));
 }
 
 mainPage::~mainPage() {
@@ -23,5 +24,5 @@ void mainPage::goSubstracToolPage(){
 }
 
 void mainPage::goLabelToolPage(){
-
+	gui::goToPage("labelToolPage");
 }
