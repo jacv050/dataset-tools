@@ -63,6 +63,7 @@ void gui::goToPage(const std::string& page){
 
 void gui::indexChanged(int index){
 	mGui->setMinimumSize(mStackedWidget->currentWidget()->minimumSize());
+	mGui->setMaximumSize(mStackedWidget->currentWidget()->maximumSize());
 }
 
 void gui::setMinimumConstraint(int width, int height){
