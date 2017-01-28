@@ -13,8 +13,6 @@ const QString substractToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::substractToolPage){
-	//mGmUi->setMinimumWidth(560);
-	//mGmUi->setMinimumHeight(437);
 	mUi->setupUi(this);
 	mUi->sbHsvchannel->setEnabled(mUi->cbSubstractmode->isChecked());
 	mImageSubstractProcess = new QProcess(this);
