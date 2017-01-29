@@ -11,7 +11,17 @@ labelToolPage::labelToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::labelToolPage){
 	mUi->setupUi(this);
+	mLabelToolProcess = new QProcess(this);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
+}
+
+void labelToolPage::labelDataset(){
+	QStringList arguments;
+
+	arguments << "python";
+	arguments << "indexPngDataset.py";
+	arguments << mUi->txtDataset->text();
+	arguments << mUi->txtOutput->text();
 }
 
 void labelToolPage::goMainPage(){

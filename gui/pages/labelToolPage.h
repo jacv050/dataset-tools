@@ -11,6 +11,8 @@
 #include "ui_labelToolPage.h"
 #include "gui/gui.h"
 #include <QWidget>
+#include <QProcess>
+#include <QStringList>
 
 class labelToolPage : public QWidget{
 	Q_OBJECT
@@ -21,9 +23,13 @@ public:
 public slots:
 	//Button event to return main page
 	void goMainPage();
+	//Button event to label scene
+	void labelDataset();
 
 private:
 	Ui::labelToolPage *mUi;
+	QProcess *mLabelToolProcess;
+
 };
 
 #endif /* LABELTOOLPAGE_H_ */
