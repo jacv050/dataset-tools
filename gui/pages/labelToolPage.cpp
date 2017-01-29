@@ -19,15 +19,7 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbSetDataset, SIGNAL(clicked()), this, SLOT(setDataset()));
 	connect(mUi->pbSetOutput, SIGNAL(clicked()), this, SLOT(setOutput()));
 	connect(mUi->pbExecute, SIGNAL(clicked()), this, SLOT(labelDataset()));
-}
-
-void labelToolPage::labelDataset(){
-	QStringList arguments;
-	arguments << "indexPngDataset.py";
-	arguments << mUi->txtDataset->text();
-	arguments << mUi->txtOutput->text();
-
-	mLabelToolProcess->start("python", arguments);
+	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 }
 
 void labelToolPage::setDataset(){
@@ -52,11 +44,30 @@ void labelToolPage::setOutput(){
 	}
 }
 
+void labelToolPage::readyOutputMsgProcess(){
+	QString s = tr(mLabelToolProcess->readAllStandardOutput());
+	mUi->txtOutputProcess->appendPlainText(s);
+}
+
 void labelToolPage::goMainPage(){
 	gui::goToPage("mainPage");
 }
 
 labelToolPage::~labelToolPage() {
 	delete mUi;
+}
+
+void labelToolPage::labelDataset(){
+	QStringList arguments;
+	arguments << "indexPngDataset.py";
+	arguments << mUi->txtDataset->text();
+	arguments << mUi->txtOutput->text();
+
+	if(mLabelToolProcess->isOpen()){
+		mLabelToolProcess->kill();
+		mLabelToolProcess->waitForFinished();
+	}
+
+	mLabelToolProcess->start("python", arguments);
 }
 

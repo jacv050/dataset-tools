@@ -30,6 +30,8 @@ public slots:
 	void setDataset();
 	//Button event to select output
 	void setOutput();
+	//Update message
+	void readyOutputMsgProcess();
 
 private:
 	Ui::labelToolPage *mUi;

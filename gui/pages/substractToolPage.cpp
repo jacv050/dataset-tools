@@ -86,7 +86,6 @@ void substractToolPage::readyOutputMsgProcess(){
 }
 
 void substractToolPage::substractObject(){
-	bool isBackgroundImage = true;
 	//Execute application to substract
 	if(mUi->txtBackground->text().isEmpty() ||
 			mUi->txtObject->text().isEmpty() ||
