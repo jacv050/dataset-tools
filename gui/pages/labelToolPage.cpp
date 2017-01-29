@@ -40,7 +40,14 @@ void labelToolPage::setDataset(){
 }
 
 void labelToolPage::setOutput(){
-
+	QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open File"),
+			mLastOutput.toLocal8Bit().constData(),
+			KOUTPUTIMAGEFORMATS);
+	if(!fileName.isNull()){
+		mLastOutput = fileName;
+		mUi->txtOutput->setText(fileName);
+	}
 }
 
 void labelToolPage::goMainPage(){

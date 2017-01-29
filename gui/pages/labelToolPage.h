@@ -36,6 +36,7 @@ private:
 	QProcess *mLabelToolProcess;
 
 	QString mLastDataset;
+	QString mLastOutput;
 
 	static const QString KINPUTFORMATS;
 	static const QString KOUTPUTIMAGEFORMATS;
