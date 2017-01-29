@@ -65,7 +65,7 @@
     <string>Dataset</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pbSetOtput">
+  <widget class="QPushButton" name="pbSetOutput">
    <property name="geometry">
     <rect>
      <x>10</x>

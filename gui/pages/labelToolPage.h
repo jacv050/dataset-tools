@@ -25,6 +25,10 @@ public slots:
 	void goMainPage();
 	//Button event to label scene
 	void labelDataset();
+	//Button event to select dataset
+	void setDataset();
+	//Button event to select output
+	void setOutput();
 
 private:
 	Ui::labelToolPage *mUi;
