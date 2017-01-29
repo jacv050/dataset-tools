@@ -42,7 +42,7 @@
   <widget class="QPushButton" name="pbReturnMainPage">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>460</y>
      <width>89</width>
      <height>25</height>
@@ -82,10 +82,33 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>110</y>
+     <y>120</y>
      <width>541</width>
-     <height>301</height>
+     <height>121</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="txtOutputProcess">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>250</y>
+     <width>541</width>
+     <height>171</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbExecute">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Execute</string>
    </property>
   </widget>
  </widget>

@@ -51,7 +51,6 @@ void substractToolPage::setBackgroundImage(){
 }
 
 void substractToolPage::setObjectImage(){
-
 	QString fileName = QFileDialog::getOpenFileName(this,
 			tr("Open File"),
 			mLastPageObject.toLocal8Bit().constData(),

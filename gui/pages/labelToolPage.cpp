@@ -18,14 +18,16 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbSetDataset, SIGNAL(clicked()), this, SLOT(setDataset()));
 	connect(mUi->pbSetOutput, SIGNAL(clicked()), this, SLOT(setOutput()));
+	connect(mUi->pbExecute, SIGNAL(clicked()), this, SLOT(labelDataset()));
 }
 
 void labelToolPage::labelDataset(){
 	QStringList arguments;
-	arguments << "python";
 	arguments << "indexPngDataset.py";
 	arguments << mUi->txtDataset->text();
 	arguments << mUi->txtOutput->text();
+
+	mLabelToolProcess->start("python", arguments);
 }
 
 void labelToolPage::setDataset(){
