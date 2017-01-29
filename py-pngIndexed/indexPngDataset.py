@@ -1,64 +1,66 @@
 from PIL import Image
 import numpy as np
 import sys
+import csv
 
-dataset = {
-    'air_freshener': (1, [10, 0, 0]),
-    'banana': (2, [0, 10, 0]),
-    'big_dice': (3, [0, 0, 10]),
-    'blue_vase': (4, [20, 0, 0]),
-    'chocolate_syrup': (5, [0, 20, 0]),
-    'cocacola': (6, [0, 0, 20]),
-    'cofee_cup_1': (7, [30, 0, 0]),
-    'cofee_cup_2': (8, [0, 30, 0]),
-    'colacao': (9, [0, 0, 30]),
-    'danone_yogurt': (10, [40, 0, 0]),
-    'hand_crean': (11, [0, 40, 0]),
-    'honey_pot':(12, [0, 0, 40]),
-    'medicine_1':(13, [50, 0, 0]),
-    'medicine_2':(14, [0, 50, 0]),
-    'medicine_3':(15, [0, 0, 50]),
-    'medicine_4':(16, [60, 0, 0]),
-    'medicine_5':(17, [0, 60, 0]),
-    'medicine_6':(18, [0, 0, 60]),
-    'milk':(19, [70, 0, 0]),
-    'plant':(20, [0, 70, 0]),
-    'plastic_knife':(21, [0, 0, 70]),
-    'plastic_plate':(22, [80, 0, 0]),
-    'saccharine':(23, [0, 80, 0]),
-    'taz':(24, [0, 0, 80]),
-    'tea':(25, [90, 0, 0]),
-    'telephone':(26, [0, 90, 0]),
-    'toilet':(27, [0, 0, 90]),
-    'wireless_telephone':(28, [100, 0, 0])}
+#Cambiar para que al introducir una ruta poder ponerle un apodo. en plan
+#ruta/mascara.png:objecto_diccionario
+
+def processDataset(dataset):
+    dataset_dict = {}
+    with open(dataset,'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+        for row in spamreader:
+            colour = row[2].split(',')
+            dataset_dict[row[0]] = (int(row[1]), [int(colour[0]),int(colour[1]),int(colour[2])])
+            #print ' '.join(row)
+    
+    return dataset_dict
 
 def main(argv):
     arguments = len(argv)
-    if arguments == 1:
-        print "You must introduce the list of routes of the masks: python-script mask1 mask2 mask3..."
+    if arguments <= 3:
+        print "You must introduce:"
+        print "\tscript.py dataset.csv output.png list_of_ masks_routes(python-script dataset mask1[:object_name] mask2[:object_name] mask3[:object_name]...)"
         sys.exit(0)    
 
+    dataset = processDataset(argv[1])
+    #print dataset
+
     #Quantity of masks
-    quantyMasks = arguments - 1
+    quantyMasks = arguments - 3
 
     #Create double palette colour
     max_colour = np.iinfo('uint8').max
     map_palette = [0]*(max_colour+1)*3
-    indexed = np.array(Image.open(str(argv[1])).convert('P'))*0
+    indexed = np.array(Image.open(str(argv[3])).convert('P'))*0
 
     #Indexing mas in png
-    for i in range(1, arguments):
+    for i in range(3, arguments):
         print "Processing", argv[i]
         splitted = argv[i].split('/')
-        data = dataset[splitted[len(splitted)-1].split('.')[0]]
-        im = Image.open(str(argv[i])).convert('P')
+        name = splitted[len(splitted)-1]
+        key = ""
+        nameFile = ""
+        pos_delimiter = name.find(':')
+        if(pos_delimiter == -1):
+            key = name.split('.')[0]
+            nameFile = argv[i]
+        else:
+            key = name[pos_delimiter+1:len(name)]
+            nameFile = argv[i].split(':')[0]
+            #print key
+
+        print key
+        data = dataset[key]
+        im = Image.open(nameFile).convert('P')
         mask = np.array(im)
         indexed[mask > max_colour/2] = data[0]
         map_palette[data[0]*3 : (data[0]+1)*3] = data[1]
 
     imfile = Image.fromarray(indexed)
     imfile.putpalette(map_palette)
-    imfile.save('pngIndexed.png')
+    imfile.save(argv[2])
 
 
 if __name__ == "__main__":
