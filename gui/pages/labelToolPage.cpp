@@ -7,6 +7,9 @@
 
 #include <gui/pages/labelToolPage.h>
 
+const QString labelToolPage::KINPUTFORMATS = tr("Images (*.csv *.txt)");
+const QString labelToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
+
 labelToolPage::labelToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::labelToolPage){
@@ -26,7 +29,14 @@ void labelToolPage::labelDataset(){
 }
 
 void labelToolPage::setDataset(){
-
+	QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open File"),
+			mLastDataset.toLocal8Bit().constData(),
+			KINPUTFORMATS);
+	if(!fileName.isNull()){
+		mLastDataset = fileName;
+		mUi->txtDataset->setText(fileName);
+	}
 }
 
 void labelToolPage::setOutput(){

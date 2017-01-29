@@ -13,6 +13,7 @@
 #include <QWidget>
 #include <QProcess>
 #include <QStringList>
+#include <QFileDialog>
 
 class labelToolPage : public QWidget{
 	Q_OBJECT
@@ -34,6 +35,10 @@ private:
 	Ui::labelToolPage *mUi;
 	QProcess *mLabelToolProcess;
 
+	QString mLastDataset;
+
+	static const QString KINPUTFORMATS;
+	static const QString KOUTPUTIMAGEFORMATS;
 };
 
 #endif /* LABELTOOLPAGE_H_ */
