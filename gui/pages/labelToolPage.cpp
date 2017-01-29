@@ -59,7 +59,7 @@ labelToolPage::~labelToolPage() {
 
 void labelToolPage::labelDataset(){
 	QStringList arguments;
-	arguments << "indexPngDataset.py";
+	arguments << QDir::currentPath() + QDir::separator() + "indexPngDataset.py";
 	arguments << mUi->txtDataset->text();
 	arguments << mUi->txtOutput->text();
 
