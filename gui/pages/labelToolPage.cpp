@@ -7,6 +7,7 @@
 
 #include <gui/pages/labelToolPage.h>
 
+const QString labelToolPage::KIMAGEFORMATS = tr("Images (*.png )");
 const QString labelToolPage::KINPUTFORMATS = tr("Images (*.csv *.txt)");
 const QString labelToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
 
@@ -20,6 +21,7 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbSetOutput, SIGNAL(clicked()), this, SLOT(setOutput()));
 	connect(mUi->pbExecute, SIGNAL(clicked()), this, SLOT(labelDataset()));
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
+	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
 }
 
 void labelToolPage::setDataset(){
@@ -55,6 +57,19 @@ void labelToolPage::goMainPage(){
 
 labelToolPage::~labelToolPage() {
 	delete mUi;
+}
+
+void labelToolPage::addMask(){
+	QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open File"),
+			mLastMask.toLocal8Bit().constData(),
+			KIMAGEFORMATS);
+	if(!fileName.isNull()){
+		mLastMask = fileName;
+	}
+
+	new QListWidgetItem(fileName,mUi->listAddedMasks);
+	//mUi->listAddedMasks->addItem(fileName);
 }
 
 void labelToolPage::labelDataset(){

@@ -32,6 +32,8 @@ public slots:
 	void setOutput();
 	//Update message
 	void readyOutputMsgProcess();
+	//Add mask
+	void addMask();
 
 private:
 	Ui::labelToolPage *mUi;
@@ -39,7 +41,9 @@ private:
 
 	QString mLastDataset;
 	QString mLastOutput;
+	QString mLastMask;
 
+	static const QString KIMAGEFORMATS;
 	static const QString KINPUTFORMATS;
 	static const QString KOUTPUTIMAGEFORMATS;
 };
