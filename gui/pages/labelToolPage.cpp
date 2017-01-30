@@ -15,6 +15,7 @@ labelToolPage::labelToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::labelToolPage){
 	mUi->setupUi(this);
+	mSelectObjectDialog = new selectObjectDialog();
 	mLabelToolProcess = new QProcess(this);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbSetDataset, SIGNAL(clicked()), this, SLOT(setDataset()));
@@ -26,6 +27,8 @@ mUi(new Ui::labelToolPage){
 }
 
 void labelToolPage::selectObjectMask(){
+	mSelectObjectDialog->setModal(true);
+	mSelectObjectDialog->exec();
 }
 
 void labelToolPage::setDataset(){

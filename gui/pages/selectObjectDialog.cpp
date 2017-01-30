@@ -7,8 +7,11 @@
 
 #include <gui/pages/selectObjectDialog.h>
 
-selectObjectDialog::selectObjectDialog(QWidget *parent) {
-
+selectObjectDialog::selectObjectDialog(){
+	//setParent(parent);
+	mVerticalLayout = new QVBoxLayout(this);
+	mDatasetList = new QListWidget(this);
+	mVerticalLayout->addWidget(mDatasetList);
 }
 
 selectObjectDialog::~selectObjectDialog() {

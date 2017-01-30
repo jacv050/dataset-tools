@@ -15,6 +15,7 @@
 #include <QStringList>
 #include <QFileDialog>
 #include <QDialog>
+#include "selectObjectDialog.h"
 
 class labelToolPage : public QWidget{
 	Q_OBJECT
@@ -41,6 +42,7 @@ public slots:
 private:
 	Ui::labelToolPage *mUi;
 	QProcess *mLabelToolProcess;
+	selectObjectDialog *mSelectObjectDialog;
 
 	QString mLastDataset;
 	QString mLastOutput;

@@ -9,11 +9,18 @@
 #define SELECTOBJECTDIALOG_H_
 
 #include <QDialog>
+#include <QVBoxLayout>
+#include <QListWidget>
 
 class selectObjectDialog : public QDialog{
+	Q_OBJECT
 public:
-	selectObjectDialog(QWidget *parent=0);
+	selectObjectDialog();
 	virtual ~selectObjectDialog();
+
+private:
+	QVBoxLayout *mVerticalLayout;
+	QListWidget *mDatasetList;
 };
 
 #endif /* SELECTOBJECTDIALOG_H_ */
