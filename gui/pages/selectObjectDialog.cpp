@@ -14,9 +14,21 @@ selectObjectDialog::selectObjectDialog(){
 	mVerticalLayout = new QVBoxLayout(this);
 	mDatasetList = new QListWidget(this);
 	mVerticalLayout->addWidget(mDatasetList);
+	connect(mDatasetList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(nameSelected(QListWidgetItem*)));
+}
+
+QString selectObjectDialog::selectName(){
+	exec();
+	return mNameSelected;
+}
+
+void selectObjectDialog::nameSelected(QListWidgetItem* item){
+	mNameSelected = item->text();
+	close();
 }
 
 void selectObjectDialog::loadDataset(const QString& filePath){
+	mDatasetList->clear();
 	std::ifstream ifs(filePath.toLocal8Bit().constData());
 	std::string line="";
 	QString name="";

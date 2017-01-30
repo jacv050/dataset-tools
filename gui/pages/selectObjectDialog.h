@@ -20,11 +20,16 @@ class selectObjectDialog : public QDialog{
 public:
 	selectObjectDialog();
 	void loadDataset(const QString& filePath);
+	QString selectName();
 	virtual ~selectObjectDialog();
+
+public slots:
+	void nameSelected(QListWidgetItem* item);
 
 private:
 	QVBoxLayout *mVerticalLayout;
 	QListWidget *mDatasetList;
+	QString mNameSelected;
 	static const char KSEPARATOR;
 };
 

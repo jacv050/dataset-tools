@@ -23,12 +23,13 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbExecute, SIGNAL(clicked()), this, SLOT(labelDataset()));
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
-	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask()));
+	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask(QListWidgetItem*)));
 }
 
-void labelToolPage::selectObjectMask(){
+void labelToolPage::selectObjectMask(QListWidgetItem* item){
 	mSelectObjectDialog->setModal(true);
-	mSelectObjectDialog->exec();
+	QString name = mSelectObjectDialog->selectName();
+	item->setText(item->text()+";"+name);
 }
 
 void labelToolPage::setDataset(){
