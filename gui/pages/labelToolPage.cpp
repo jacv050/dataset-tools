@@ -68,8 +68,7 @@ void labelToolPage::addMask(){
 		mLastMask = fileName;
 	}
 
-	new QListWidgetItem(fileName,mUi->listAddedMasks);
-	//mUi->listAddedMasks->addItem(fileName);
+	mUi->listAddedMasks->addItem(fileName);
 }
 
 void labelToolPage::labelDataset(){
