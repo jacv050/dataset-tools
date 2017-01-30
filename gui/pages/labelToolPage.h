@@ -14,6 +14,7 @@
 #include <QProcess>
 #include <QStringList>
 #include <QFileDialog>
+#include <QDialog>
 
 class labelToolPage : public QWidget{
 	Q_OBJECT
