@@ -39,6 +39,7 @@ void labelToolPage::setDataset(){
 	if(!fileName.isNull()){
 		mLastDataset = fileName;
 		mUi->txtDataset->setText(fileName);
+		mSelectObjectDialog->loadDataset(fileName);
 	}
 }
 
