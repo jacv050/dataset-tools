@@ -25,6 +25,11 @@ mUi(new Ui::labelToolPage){
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
 	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask(QListWidgetItem*)));
+	connect(mUi->pbDeleteMask, SIGNAL(clicked()), this, SLOT(deleteSelectedMask()));
+}
+
+void labelToolPage::deleteSelectedMask(){
+	//mUi->listAddedMasks->removeItemWidget(mUi->listAddedMasks->);
 }
 
 void labelToolPage::selectObjectMask(QListWidgetItem* item){
@@ -85,19 +90,29 @@ void labelToolPage::addMask(){
 }
 
 void labelToolPage::labelDataset(){
-	QStringList arguments;
-	arguments << QDir::currentPath() + QDir::separator() + "indexPngDataset.py";
-	arguments << mUi->txtDataset->text();
-	arguments << mUi->txtOutput->text();
-	for(int i=0; i<mUi->listAddedMasks->count(); ++i){
-		arguments << mUi->listAddedMasks->item(i)->text();
-	}
+	//Check parameters
+	if(mUi->txtDataset->text().isEmpty() ||
+			mUi->txtOutput->text().isEmpty() ||
+			mUi->listAddedMasks->count() == 0){
+		//throw window error
+		QMessageBox msgBox(this);
+		msgBox.setText("You must introduce dataset route, out file and masks.");
+		msgBox.exec();
+	}else{
+		QStringList arguments;
+		arguments << QDir::currentPath() + QDir::separator() + "indexPngDataset.py";
+		arguments << mUi->txtDataset->text();
+		arguments << mUi->txtOutput->text();
+		for(int i=0; i<mUi->listAddedMasks->count(); ++i){
+			arguments << mUi->listAddedMasks->item(i)->text();
+		}
 
-	if(mLabelToolProcess->isOpen()){
-		mLabelToolProcess->kill();
-		mLabelToolProcess->waitForFinished();
-	}
+		if(mLabelToolProcess->isOpen()){
+			mLabelToolProcess->kill();
+			mLabelToolProcess->waitForFinished();
+		}
 
-	mLabelToolProcess->start("python", arguments);
+		mLabelToolProcess->start("python", arguments);
+	}
 }
 

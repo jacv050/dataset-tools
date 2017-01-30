@@ -127,6 +127,19 @@
     <string>AddMask</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pbDeleteMask">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>80</y>
+     <width>83</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>DeleteMask</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -38,6 +38,8 @@ public slots:
 	void addMask();
 	//Select object in list widget
 	void selectObjectMask(QListWidgetItem* item);
+	//Event delete mask
+	void deleteSelectedMask();
 
 private:
 	Ui::labelToolPage *mUi;
