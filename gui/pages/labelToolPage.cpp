@@ -25,21 +25,19 @@ mUi(new Ui::labelToolPage){
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
 	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask(QListWidgetItem*)));
-	connect(mUi->pbDeleteMask, SIGNAL(clicked()), this, SLOT(deleteSelectedMask()));
-}
-
-void labelToolPage::deleteSelectedMask(){
-	//mUi->listAddedMasks->removeItemWidget(mUi->listAddedMasks->);
+	//connect(mUi->pbDeleteMask, SIGNAL(clicked()), this, SLOT(deleteSelectedMask()));
 }
 
 void labelToolPage::selectObjectMask(QListWidgetItem* item){
 	mSelectObjectDialog->setModal(true);
-	QString name = mSelectObjectDialog->selectName();
-	int index = item->text().indexOf(KSEPARATOR);
-	if(index == -1)
-		item->setText(item->text()+KSEPARATOR+name);
-	else
-		item->setText(item->text().left(index)+KSEPARATOR+name);
+	QString name = mSelectObjectDialog->selectName(mUi->listAddedMasks, item);
+	if(!name.isNull()){
+		int index = item->text().indexOf(KSEPARATOR);
+		if(index == -1)
+			item->setText(item->text()+KSEPARATOR+name);
+		else
+			item->setText(item->text().left(index)+KSEPARATOR+name);
+	}
 }
 
 void labelToolPage::setDataset(){

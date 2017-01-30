@@ -13,11 +13,22 @@ selectObjectDialog::selectObjectDialog(){
 	//setParent(parent);
 	mVerticalLayout = new QVBoxLayout(this);
 	mDatasetList = new QListWidget(this);
+	mPbDelete = new QPushButton(this);
+	mPbDelete->setText("Delete");
 	mVerticalLayout->addWidget(mDatasetList);
+	mVerticalLayout->addWidget(mPbDelete);
 	connect(mDatasetList, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(nameSelected(QListWidgetItem*)));
+	connect(mPbDelete, SIGNAL(clicked()), this, SLOT(deleteSelectedMask()));
 }
 
-QString selectObjectDialog::selectName(){
+void selectObjectDialog::deleteSelectedMask(){
+	delete mListMaskAux->takeItem(mListMaskAux->row(mListMaskItemAux));
+	close();
+}
+
+QString selectObjectDialog::selectName(QListWidget *lw, QListWidgetItem *lwi){
+	mListMaskAux = lw;
+	mListMaskItemAux = lwi;
 	exec();
 	return mNameSelected;
 }

@@ -14,21 +14,28 @@
 #include <QString>
 #include <fstream>
 #include <vector>
+#include <QPushButton>
 
 class selectObjectDialog : public QDialog{
 	Q_OBJECT
 public:
 	selectObjectDialog();
 	void loadDataset(const QString& filePath);
-	QString selectName();
+	QString selectName(QListWidget*, QListWidgetItem*);
 	virtual ~selectObjectDialog();
 
 public slots:
 	void nameSelected(QListWidgetItem* item);
+	//Event delete mask
+	void deleteSelectedMask();
 
 private:
+	QListWidget *mListMaskAux;
+	QListWidgetItem *mListMaskItemAux;
+
 	QVBoxLayout *mVerticalLayout;
 	QListWidget *mDatasetList;
+	QPushButton *mPbDelete;
 	QString mNameSelected;
 	static const char KSEPARATOR;
 };
