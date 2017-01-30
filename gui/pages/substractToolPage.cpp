@@ -29,7 +29,15 @@ mUi(new Ui::substractToolPage){
 }
 
 void substractToolPage::setNewObject(){
-
+	QString fileName = QFileDialog::getOpenFileName(this,
+			tr("Open File"),
+			mLastPageNewObject.toLocal8Bit().constData(),
+			KIMAGEFORMATS);
+	if(!fileName.isNull()){
+		mUi->txtBackground->setText(mUi->txtObject->text());
+		mLastPageNewObject = fileName;
+		mUi->txtObject->setText(fileName);
+	}
 }
 
 void substractToolPage::goMainPage(){

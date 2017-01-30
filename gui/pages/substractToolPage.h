@@ -49,6 +49,7 @@ private:
 
 	QString mLastPageBackground;
 	QString mLastPageObject;
+	QString mLastPageNewObject;
 	QString mLastMaskDestiny;
 
 	static const QString KIMAGEFORMATS;
