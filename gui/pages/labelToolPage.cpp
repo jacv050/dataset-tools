@@ -10,6 +10,7 @@
 const QString labelToolPage::KIMAGEFORMATS = tr("Images (*.png )");
 const QString labelToolPage::KINPUTFORMATS = tr("Images (*.csv *.txt)");
 const QString labelToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
+const char labelToolPage::KSEPARATOR=':';
 
 labelToolPage::labelToolPage(QWidget *parent) :
 QWidget(parent),
@@ -29,7 +30,11 @@ mUi(new Ui::labelToolPage){
 void labelToolPage::selectObjectMask(QListWidgetItem* item){
 	mSelectObjectDialog->setModal(true);
 	QString name = mSelectObjectDialog->selectName();
-	item->setText(item->text()+";"+name);
+	int index = item->text().indexOf(KSEPARATOR);
+	if(index == -1)
+		item->setText(item->text()+KSEPARATOR+name);
+	else
+		item->setText(item->text().left(index)+KSEPARATOR+name);
 }
 
 void labelToolPage::setDataset(){

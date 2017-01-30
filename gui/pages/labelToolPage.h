@@ -51,6 +51,7 @@ private:
 	static const QString KIMAGEFORMATS;
 	static const QString KINPUTFORMATS;
 	static const QString KOUTPUTIMAGEFORMATS;
+	static const char KSEPARATOR;
 };
 
 #endif /* LABELTOOLPAGE_H_ */
