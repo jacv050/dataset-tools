@@ -76,6 +76,9 @@ void labelToolPage::labelDataset(){
 	arguments << QDir::currentPath() + QDir::separator() + "indexPngDataset.py";
 	arguments << mUi->txtDataset->text();
 	arguments << mUi->txtOutput->text();
+	for(int i=0; i<mUi->listAddedMasks->count(); ++i){
+		arguments << mUi->listAddedMasks->item(i)->text();
+	}
 
 	if(mLabelToolProcess->isOpen()){
 		mLabelToolProcess->kill();
