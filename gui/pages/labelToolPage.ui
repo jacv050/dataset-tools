@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="pbReturnMainPage">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>460</y>
+     <x>210</x>
+     <y>80</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -78,16 +78,6 @@
     <string>Output</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="txtOutputProcess">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>250</y>
-     <width>541</width>
-     <height>171</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pbExecute">
    <property name="geometry">
     <rect>
@@ -107,7 +97,7 @@
      <x>10</x>
      <y>121</y>
      <width>541</width>
-     <height>121</height>
+     <height>161</height>
     </rect>
    </property>
    <property name="dragDropMode">
@@ -125,6 +115,16 @@
    </property>
    <property name="text">
     <string>AddMask</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="txtOutputProcess">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>290</y>
+     <width>541</width>
+     <height>211</height>
+    </rect>
    </property>
   </widget>
  </widget>

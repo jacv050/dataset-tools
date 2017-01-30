@@ -23,9 +23,23 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbSetOutput, SIGNAL(clicked()), this, SLOT(setOutput()));
 	connect(mUi->pbExecute, SIGNAL(clicked()), this, SLOT(labelDataset()));
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
+	connect(mLabelToolProcess, SIGNAL(readyReadStandardError()), this, SLOT(readyErrorMsgProcess()));
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
 	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask(QListWidgetItem*)));
-	//connect(mUi->pbDeleteMask, SIGNAL(clicked()), this, SLOT(deleteSelectedMask()));
+}
+
+void labelToolPage::readyErrorMsgProcess(){
+	QString s("<font color=red>");
+	s.append(tr(mLabelToolProcess->readAllStandardError()));
+	s.append(tr("</font><br><br>"));
+	mUi->txtOutputProcess->insertHtml(s);
+}
+
+void labelToolPage::readyOutputMsgProcess(){
+	QString s("<font color=black>");
+	s.append(tr(mLabelToolProcess->readAllStandardOutput()));
+	s.append(tr("</font><br><br>"));
+	mUi->txtOutputProcess->insertHtml(s);
 }
 
 void labelToolPage::selectObjectMask(QListWidgetItem* item){
@@ -61,11 +75,6 @@ void labelToolPage::setOutput(){
 		mLastOutput = fileName;
 		mUi->txtOutput->setText(fileName);
 	}
-}
-
-void labelToolPage::readyOutputMsgProcess(){
-	QString s = tr(mLabelToolProcess->readAllStandardOutput());
-	mUi->txtOutputProcess->appendPlainText(s);
 }
 
 void labelToolPage::goMainPage(){

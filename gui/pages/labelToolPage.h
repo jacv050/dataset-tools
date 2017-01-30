@@ -34,6 +34,8 @@ public slots:
 	void setOutput();
 	//Update message
 	void readyOutputMsgProcess();
+	//Update error message
+	void readyErrorMsgProcess();
 	//Add mask
 	void addMask();
 	//Select object in list widget
