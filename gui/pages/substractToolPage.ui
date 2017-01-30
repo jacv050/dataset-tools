@@ -251,7 +251,7 @@ Uncheked substract object with images in gray scale</string>
     </rect>
    </property>
    <property name="text">
-    <string>Destiny</string>
+    <string>Output</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="txtMaskDestiny">
