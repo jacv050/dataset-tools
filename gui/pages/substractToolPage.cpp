@@ -24,7 +24,12 @@ mUi(new Ui::substractToolPage){
 	connect(mUi->pbMaskDestiny, SIGNAL(clicked()), this, SLOT(setMaskNameDestiny()));
 	connect(mUi->pbSubstractTool, SIGNAL(clicked()), this, SLOT(substractObject()));
 	connect(mUi->cbSubstractmode, SIGNAL(clicked()), this, SLOT(substractModeChanged()));
+	connect(mUi->pbNewObject, SIGNAL(clicked()), this, SLOT(setNewObject()));
 	connect(mImageSubstractProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
+}
+
+void substractToolPage::setNewObject(){
+
 }
 
 void substractToolPage::goMainPage(){
@@ -86,6 +91,9 @@ void substractToolPage::readyOutputMsgProcess(){
 }
 
 void substractToolPage::substractObject(){
+	if(!mUi->pbNewObject->isEnabled()){
+		mUi->pbNewObject->setEnabled(true);
+	}
 	//Execute application to substract
 	if(mUi->txtBackground->text().isEmpty() ||
 			mUi->txtObject->text().isEmpty() ||

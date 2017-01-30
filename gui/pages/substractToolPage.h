@@ -40,6 +40,8 @@ public slots:
 	void readyOutputMsgProcess();
 	//Event checkbox substract mode
 	void substractModeChanged();
+	//Event to add new object swaping background and object
+	void setNewObject();
 
 private:
 	Ui::substractToolPage *mUi;

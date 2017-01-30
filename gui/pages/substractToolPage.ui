@@ -274,6 +274,22 @@ Uncheked substract object with images in gray scale</string>
     </rect>
    </property>
   </widget>
+  <widget class="QPushButton" name="pbNewObject">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>120</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>New Object</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
