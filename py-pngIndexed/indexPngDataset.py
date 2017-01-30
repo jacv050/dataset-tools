@@ -33,7 +33,12 @@ def main(argv):
     #Create double palette colour
     max_colour = np.iinfo('uint8').max
     map_palette = [0]*(max_colour+1)*3
-    indexed = np.array(Image.open(str(argv[3])).convert('P'))*0
+    indexed = []
+    pos_delimiter = str(argv[3]).find(':')
+    if(pos_delimiter == -1):
+        indexed = np.array(Image.open(str(argv[3])).convert('P'))*0
+    else:
+        indexed = np.array(Image.open(str(argv[3])[0:pos_delimiter]).convert('P'))*0
 
     #Indexing mas in png
     for i in range(3, arguments):
