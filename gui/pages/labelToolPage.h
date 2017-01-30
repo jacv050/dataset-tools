@@ -35,6 +35,8 @@ public slots:
 	void readyOutputMsgProcess();
 	//Add mask
 	void addMask();
+	//Select object in list widget
+	void selectObjectMask();
 
 private:
 	Ui::labelToolPage *mUi;

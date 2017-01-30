@@ -22,6 +22,10 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbExecute, SIGNAL(clicked()), this, SLOT(labelDataset()));
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
+	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask()));
+}
+
+void labelToolPage::selectObjectMask(){
 }
 
 void labelToolPage::setDataset(){
@@ -66,9 +70,8 @@ void labelToolPage::addMask(){
 			KIMAGEFORMATS);
 	if(!fileName.isNull()){
 		mLastMask = fileName;
+		mUi->listAddedMasks->addItem(fileName);
 	}
-
-	mUi->listAddedMasks->addItem(fileName);
 }
 
 void labelToolPage::labelDataset(){
