@@ -11,6 +11,8 @@ const char selectObjectDialog::KSEPARATOR = ';';
 
 selectObjectDialog::selectObjectDialog(){
 	//setParent(parent);
+	mListMaskAux = NULL;
+	mListMaskItemAux = NULL;
 	mVerticalLayout = new QVBoxLayout(this);
 	mDatasetList = new QListWidget(this);
 	mPbDelete = new QPushButton(this);
