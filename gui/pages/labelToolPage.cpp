@@ -48,9 +48,13 @@ void labelToolPage::selectObjectMask(QListWidgetItem* item){
 	if(!name.isNull()){
 		int index = item->text().indexOf(KSEPARATOR);
 		if(index == -1)
-			item->setText(item->text()+KSEPARATOR+name);
-		else
-			item->setText(item->text().left(index)+KSEPARATOR+name);
+			item->setText(item->text().append(KSEPARATOR).append(name));
+		else if(name != selectObjectDialog::KDELETENAME){
+			mUi->listAddedMasks->removeItemWidget(item);
+			item->setText(item->text().left(index).append(KSEPARATOR).append(name));
+		}else{
+			delete mUi->listAddedMasks->takeItem(mUi->listAddedMasks->row(item));
+		}
 	}
 }
 
@@ -92,7 +96,8 @@ void labelToolPage::addMask(){
 			KIMAGEFORMATS);
 	if(!fileName.isNull()){
 		mLastMask = fileName;
-		mUi->listAddedMasks->addItem(fileName);
+		new QListWidgetItem(fileName, mUi->listAddedMasks);
+		//mUi->listAddedMasks->addItem(fileName);
 	}
 }
 

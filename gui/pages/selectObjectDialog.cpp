@@ -8,9 +8,11 @@
 #include <gui/pages/selectObjectDialog.h>
 
 const char selectObjectDialog::KSEPARATOR = ';';
+const QString selectObjectDialog::KDELETENAME="DELETE?'-.";
 
 selectObjectDialog::selectObjectDialog(){
 	//setParent(parent);
+	mDelete = false;
 	mListMaskAux = NULL;
 	mListMaskItemAux = NULL;
 	mVerticalLayout = new QVBoxLayout(this);
@@ -24,14 +26,21 @@ selectObjectDialog::selectObjectDialog(){
 }
 
 void selectObjectDialog::deleteSelectedMask(){
-	delete mListMaskAux->takeItem(mListMaskAux->row(mListMaskItemAux));
+	mDelete = true;
 	close();
 }
 
 QString selectObjectDialog::selectName(QListWidget *lw, QListWidgetItem *lwi){
 	mListMaskAux = lw;
 	mListMaskItemAux = lwi;
+
 	exec();
+
+	if(mDelete){
+		mNameSelected = KDELETENAME;
+		mDelete = false;
+	}
+
 	return mNameSelected;
 }
 
