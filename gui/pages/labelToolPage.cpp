@@ -109,14 +109,22 @@ labelToolPage::~labelToolPage() {
 }
 
 void labelToolPage::addMask(){
-	QString fileName = QFileDialog::getOpenFileName(this,
-			tr("Open File"),
-			mLastMask.toLocal8Bit().constData(),
-			KIMAGEFORMATS);
-	if(!fileName.isNull()){
-		mLastMask = fileName;
-		new QListWidgetItem(fileName, mUi->listAddedMasks);
-		//mUi->listAddedMasks->addItem(fileName);
+	QFileDialog dialog(this);
+	dialog.setFileMode(QFileDialog::ExistingFiles);
+	dialog.setNameFilter(KIMAGEFORMATS);
+	dialog.setViewMode(QFileDialog::Detail);
+	if(!mLastMask.isEmpty())
+		dialog.setDirectory(mLastMask);
+
+	QStringList fileNames;
+	if (dialog.exec()){
+	    fileNames = dialog.selectedFiles();
+	    for(int i=0; i<fileNames.size(); ++i){
+		    if(!fileNames.at(i).isNull()){
+		    	mLastMask = fileNames.at(i);
+		    	mUi->listAddedMasks->addItem(fileNames.at(i));
+			}
+	    }
 	}
 }
 
