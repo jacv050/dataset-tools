@@ -26,6 +26,11 @@ mUi(new Ui::labelToolPage){
 	connect(mLabelToolProcess, SIGNAL(readyReadStandardError()), this, SLOT(readyErrorMsgProcess()));
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
 	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask(QListWidgetItem*)));
+	connect(mUi->pbDeleteAll, SIGNAL(clicked()), this, SLOT(deleteAllItems()));
+}
+
+void labelToolPage::deleteAllItems(){
+	mUi->listAddedMasks->clear();
 }
 
 void labelToolPage::readyErrorMsgProcess(){
