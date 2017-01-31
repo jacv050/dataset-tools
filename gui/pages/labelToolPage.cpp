@@ -18,6 +18,11 @@ mUi(new Ui::labelToolPage){
 	mUi->setupUi(this);
 	mSelectObjectDialog = new selectObjectDialog();
 	mLabelToolProcess = new QProcess(this);
+	mLastOutput = QDir::currentPath() + QDir::separator() + tr("pngIndexed.png");
+	mUi->txtOutput->setText(mLastOutput);
+	mLastDataset = QDir::currentPath() + QDir::separator() + tr("dataset.csv");
+	mUi->txtDataset->setText(mLastDataset);
+	mSelectObjectDialog->loadDataset(mLastDataset);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbSetDataset, SIGNAL(clicked()), this, SLOT(setDataset()));
 	connect(mUi->pbSetOutput, SIGNAL(clicked()), this, SLOT(setOutput()));
@@ -78,13 +83,20 @@ void labelToolPage::setDataset(){
 }
 
 void labelToolPage::setOutput(){
-	QString fileName = QFileDialog::getOpenFileName(this,
-			tr("Open File"),
-			mLastOutput.toLocal8Bit().constData(),
-			KOUTPUTIMAGEFORMATS);
-	if(!fileName.isNull()){
-		mLastOutput = fileName;
-		mUi->txtOutput->setText(fileName);
+	QFileDialog dialog(this);
+	dialog.setFileMode(QFileDialog::AnyFile);
+	dialog.setNameFilter(KOUTPUTIMAGEFORMATS);
+	dialog.setViewMode(QFileDialog::Detail);
+	if(!mLastOutput.isEmpty())
+		dialog.setDirectory(mLastOutput);
+
+	QStringList fileNames;
+	if (dialog.exec()){
+	    fileNames = dialog.selectedFiles();
+	    if(!fileNames.at(0).isNull()){
+	    	mLastOutput = fileNames.at(0);
+	    	mUi->txtOutput->setText(fileNames.at(0));
+		}
 	}
 }
 
