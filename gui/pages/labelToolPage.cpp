@@ -51,14 +51,16 @@ void labelToolPage::selectObjectMask(QListWidgetItem* item){
 	mSelectObjectDialog->setModal(true);
 	QString name = mSelectObjectDialog->selectName(mUi->listAddedMasks, item);
 	if(!name.isNull()){
-		int index = item->text().indexOf(KSEPARATOR);
-		if(index == -1)
-			item->setText(item->text().append(KSEPARATOR).append(name));
-		else if(name != selectObjectDialog::KDELETENAME){
-			mUi->listAddedMasks->removeItemWidget(item);
-			item->setText(item->text().left(index).append(KSEPARATOR).append(name));
-		}else{
+		if(name == selectObjectDialog::KDELETENAME)
 			delete mUi->listAddedMasks->takeItem(mUi->listAddedMasks->row(item));
+		else{
+			int index = item->text().indexOf(KSEPARATOR);
+			if(index == -1){
+				item->setText(item->text().append(KSEPARATOR).append(name));
+			}else{
+				mUi->listAddedMasks->removeItemWidget(item);
+				item->setText(item->text().left(index).append(KSEPARATOR).append(name));
+			}
 		}
 	}
 }
