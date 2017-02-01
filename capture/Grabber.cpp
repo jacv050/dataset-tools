@@ -53,8 +53,9 @@ void Grabber::keyListener(){
 		getline(std::cin, s);
 
 		mutex.lock();
-		boost::regex reg("[0-9]+");
-		if(boost::regex_match(s, reg)){
+		//boost::regex reg("[0-9]+");
+		//if(boost::regex_match(s, reg)){
+		if(s != "q"){
 			cout << "Number: " << s << "\n";
 			static boost::shared_array<unsigned char> rgb_array;
 			static unsigned char* rgb_buffer = 0;
