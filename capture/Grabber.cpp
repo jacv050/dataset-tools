@@ -80,13 +80,12 @@ void Grabber::keyListener(){
 
 }
 
-/*void Grabber::images_cb_(const boost::shared_ptr<openni_wrapper::Image>& rgbImage,
-		const boost::shared_ptr<openni_wrapper::DepthImage>& depthImage,
-		float constant){*/
 void Grabber::images_cb_(const boost::shared_ptr<pcl::io::Image>& rgbImage,
 		const boost::shared_ptr<pcl::io::DepthImage>& depthImage,
 		float constant){
-
+/*void Grabber::images_cb_(const boost::shared_ptr<openni_wrapper::Image>& rgbImage,
+		const boost::shared_ptr<openni_wrapper::DepthImage>& depthImage,
+		float constant){*/
 	mutex.lock();
 	cloud_ = convertToXYZRGBPointCloud(rgbImage, depthImage, "pene", constant);
 	rgbImage_ = rgbImage;
@@ -102,6 +101,10 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr Grabber::convertToXYZRGBPointCloud (
 			const boost::shared_ptr<pcl::io::DepthImage> &depth_image,
 			std::string rgb_frame_id, float constant_)
 {
+/*pcl::PointCloud<pcl::PointXYZRGB>::Ptr Grabber::convertToXYZRGBPointCloud (
+			const boost::shared_ptr<openni_wrapper::Image> &image,
+			const boost::shared_ptr<openni_wrapper::DepthImage> &depth_image,
+			std::string rgb_frame_id, float constant_){*/
 	static unsigned rgb_array_size = 0;
 	static boost::shared_array<unsigned char> rgb_array;
 	static unsigned char* rgb_buffer = 0;
