@@ -23,13 +23,36 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>90</y>
+     <y>130</y>
      <width>89</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>Return</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtOutputDirectory">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>20</y>
+     <width>381</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pbOutpu">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Output</string>
    </property>
   </widget>
  </widget>
