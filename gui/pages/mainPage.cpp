@@ -13,6 +13,11 @@ mUi(new Ui::mainPage){
 	mUi->setupUi(this);
 	connect(mUi->pbSubstractTool, SIGNAL(clicked()), this, SLOT(goSubstracToolPage()));
 	connect(mUi->pbLabelTool, SIGNAL(clicked()), this, SLOT(goLabelToolPage()));
+	connect(mUi->pbCaptureTool, SIGNAL(clicked()), this, SLOT(goCaptureToolPage()));
+}
+
+void mainPage::goCaptureToolPage(){
+	gui::goToPage("captureToolPage");
 }
 
 mainPage::~mainPage() {

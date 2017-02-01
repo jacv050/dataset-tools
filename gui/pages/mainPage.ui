@@ -63,7 +63,7 @@
     <string>Label Tool</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pbCaptureTool">
    <property name="geometry">
     <rect>
      <x>10</x>

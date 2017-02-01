@@ -27,6 +27,7 @@ private:
 private slots:
 	void goSubstracToolPage();
 	void goLabelToolPage();
+	void goCaptureToolPage();
 };
 
 #endif /* WMAIN_H_ */
