@@ -56,7 +56,13 @@ void captureToolPage::setOutputDirectory(){
 }
 
 void captureToolPage::doCapture(){
-
+	if(mUi->txtCapture->text().isEmpty()){
+		//throw window error
+		QMessageBox msgBox(this);
+		msgBox.setText("You must introduce a name for capture.");
+		msgBox.exec();
+	}
+	mCaptureToolProcess->write(mUi->txtCapture->text().append("\n").toLocal8Bit().constData());
 }
 
 void captureToolPage::showColorImage(){
