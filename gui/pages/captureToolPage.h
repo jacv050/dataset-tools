@@ -29,6 +29,7 @@ public slots:
 	void initTool();
 
 	void closedProcess();
+	void readyOutputMsgProcess();
 
 private:
 	Ui::captureToolPage *mUi;

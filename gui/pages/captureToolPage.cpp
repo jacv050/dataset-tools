@@ -25,6 +25,16 @@ mUi(new Ui::captureToolPage){
 	connect(mUi->pbInitTool, SIGNAL(clicked()), this, SLOT(initTool()));
 	connect(mCaptureToolProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(closedProcess()));
 	connect(mCaptureToolProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(closedProcess()));
+	connect(mCaptureToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
+}
+
+void captureToolPage::readyOutputMsgProcess(){
+	QString s = tr(mCaptureToolProcess->readAllStandardOutput());
+	if(s.contains("recorded")){
+		mUi->pbShowColorImage->setEnabled(true);
+		mUi->pbShowDepthImage->setEnabled(true);
+		mUi->pbShowPCD->setEnabled(true);
+	}
 }
 
 void captureToolPage::closedProcess(){
@@ -78,8 +88,6 @@ void captureToolPage::showPCD(){
 }
 
 void captureToolPage::initTool(){
-	mUi->pbInitTool->setEnabled(false);
-	mUi->pbCapture->setEnabled(true);
 	//Check parameters
 	if(mUi->txtOutputDirectory->text().isEmpty()){
 		//throw window error
@@ -87,6 +95,8 @@ void captureToolPage::initTool(){
 		msgBox.setText("You must introduce output directory.");
 		msgBox.exec();
 	}else{
+		mUi->pbInitTool->setEnabled(false);
+		mUi->pbCapture->setEnabled(true);
 		QStringList arguments;
 		arguments << "--n";
 		arguments << mUi->txtOutputDirectory->text();
