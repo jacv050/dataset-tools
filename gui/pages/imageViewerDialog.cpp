@@ -1,13 +1,13 @@
 /*
- * ImageViewerDialog.cpp
+ * imageViewerDialog.cpp
  *
  *  Created on: 02/02/2017
  *      Author: john
  */
 
-#include <gui/pages/ImageViewerDialog.h>
+#include <gui/pages/imageViewerDialog.h>
 
-ImageViewerDialog::ImageViewerDialog() {
+imageViewerDialog::imageViewerDialog() {
 	mVboxLayout = new QVBoxLayout(this);
 	mScrollArea = new QScrollArea(this);
 	mImageLabel = new QLabel(this);
@@ -25,7 +25,7 @@ ImageViewerDialog::ImageViewerDialog() {
 
 }
 
-void ImageViewerDialog::showImage(const QString& path){
+void imageViewerDialog::showImage(const QString& path){
 	QImageReader reader(path);
 	QImage image = reader.read();
 	if(image.isNull()){
@@ -36,6 +36,6 @@ void ImageViewerDialog::showImage(const QString& path){
 	}
 }
 
-ImageViewerDialog::~ImageViewerDialog() {
+imageViewerDialog::~imageViewerDialog() {
 }
 

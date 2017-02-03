@@ -1,5 +1,5 @@
 /*
- * ImageViewerDialog.h
+ * imageViewerDialog.h
  *
  *  Created on: 02/02/2017
  *      Author: john
@@ -16,12 +16,12 @@
 #include <QMessageBox>
 #include <QScrollArea>
 
-class ImageViewerDialog : public QDialog {
+class imageViewerDialog : public QDialog {
 	Q_OBJECT
 public:
-	ImageViewerDialog();
+	imageViewerDialog();
 	void showImage(const QString& path);
-	virtual ~ImageViewerDialog();
+	virtual ~imageViewerDialog();
 
 private:
 	QScrollArea *mScrollArea;

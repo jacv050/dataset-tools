@@ -13,7 +13,7 @@
 #include <QProcess>
 #include <QPixmap>
 #include "gui/gui.h"
-#include "gui/pages/ImageViewerDialog.h"
+#include "gui/pages/imageViewerDialog.h"
 
 class captureToolPage : public QWidget {
 	Q_OBJECT
@@ -43,8 +43,8 @@ private:
 
 	QProcess *mCaptureToolProcess;
 
-	ImageViewerDialog *mImgColorViewer;
-	ImageViewerDialog *mImgDepthViewer;
+	imageViewerDialog *mImgColorViewer;
+	imageViewerDialog *mImgDepthViewer;
 
 	static const QString KROUTECOLORDIRECTORY;
 	static const QString KROUTEDEPTHDIRECTORY;

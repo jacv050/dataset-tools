@@ -15,8 +15,8 @@ captureToolPage::captureToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::captureToolPage){
 	mUi->setupUi(this);
-	mImgColorViewer = new ImageViewerDialog();
-	mImgDepthViewer = new ImageViewerDialog();
+	mImgColorViewer = new imageViewerDialog();
+	mImgDepthViewer = new imageViewerDialog();
 	mCaptureToolProcess = new QProcess(this);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbOutput, SIGNAL(clicked()), this, SLOT(setOutputDirectory()));
