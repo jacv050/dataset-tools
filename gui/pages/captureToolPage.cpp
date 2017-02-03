@@ -15,6 +15,7 @@ captureToolPage::captureToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::captureToolPage){
 	mUi->setupUi(this);
+	mImageViewerDialog = new ImageViewerDialog();
 	mCaptureToolProcess = new QProcess(this);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbOutput, SIGNAL(clicked()), this, SLOT(setOutputDirectory()));
@@ -24,7 +25,7 @@ mUi(new Ui::captureToolPage){
 	connect(mUi->pbShowPCD, SIGNAL(clicked()), this, SLOT(showPCD()));
 	connect(mUi->pbInitTool, SIGNAL(clicked()), this, SLOT(initTool()));
 	connect(mCaptureToolProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(closedProcess()));
-	connect(mCaptureToolProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(closedProcess()));
+	//connect(mCaptureToolProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(closedProcess()));
 	connect(mCaptureToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 }
 
@@ -76,11 +77,11 @@ void captureToolPage::doCapture(){
 }
 
 void captureToolPage::showColorImage(){
-
+	///home/john/multisensor-dataset-tools/imagesubstractgrabcutgui/build/prueba/color_images/scan_.png
+	mImageViewerDialog->showImage(tr("/home/john/multisensor-dataset-tools/imagesubstractgrabcutgui/build/prueba/color_images/scan_.png"));
 }
 
 void captureToolPage::showDepthImage(){
-
 }
 
 void captureToolPage::showPCD(){

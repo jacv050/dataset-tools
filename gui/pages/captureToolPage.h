@@ -11,7 +11,9 @@
 #include "ui_captureToolPage.h"
 #include <QtWidgets>
 #include <QProcess>
+#include <QPixmap>
 #include "gui/gui.h"
+#include "gui/pages/ImageViewerDialog.h"
 
 class captureToolPage : public QWidget {
 	Q_OBJECT
@@ -32,6 +34,7 @@ public slots:
 	void readyOutputMsgProcess();
 
 private:
+
 	Ui::captureToolPage *mUi;
 	QString mRouteColorImage;
 	QString mRouteDepthImage;
@@ -39,6 +42,8 @@ private:
 	QString mLastOutputDirectory;
 
 	QProcess *mCaptureToolProcess;
+
+	ImageViewerDialog *mImageViewerDialog;
 
 	static const QString KROUTECOLORDIRECTORY;
 	static const QString KROUTEDEPTHDIRECTORY;
