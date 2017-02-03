@@ -7,9 +7,9 @@
 
 #include <gui/pages/captureToolPage.h>
 
-const QString captureToolPage::KROUTECOLORDIRECTORY = tr("");
-const QString captureToolPage::KROUTEDEPTHDIRECTORY = tr("");
-const QString captureToolPage::KROUTEPCDDIRECTORY = tr("");
+const QString captureToolPage::KROUTECOLORDIRECTORY = tr("/color_images/scan_");
+const QString captureToolPage::KROUTEDEPTHDIRECTORY = tr("/depth_images/scan_");
+const QString captureToolPage::KROUTEPCDDIRECTORY = tr("/original_clouds/pcd/scan_");
 
 captureToolPage::captureToolPage(QWidget *parent) :
 QWidget(parent),
@@ -25,7 +25,6 @@ mUi(new Ui::captureToolPage){
 	connect(mUi->pbShowPCD, SIGNAL(clicked()), this, SLOT(showPCD()));
 	connect(mUi->pbInitTool, SIGNAL(clicked()), this, SLOT(initTool()));
 	connect(mCaptureToolProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(closedProcess()));
-	//connect(mCaptureToolProcess, SIGNAL(errorOccurred(QProcess::ProcessError)), this, SLOT(closedProcess()));
 	connect(mCaptureToolProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
 }
 
@@ -77,11 +76,11 @@ void captureToolPage::doCapture(){
 }
 
 void captureToolPage::showColorImage(){
-	///home/john/multisensor-dataset-tools/imagesubstractgrabcutgui/build/prueba/color_images/scan_.png
-	mImageViewerDialog->showImage(tr("/home/john/multisensor-dataset-tools/imagesubstractgrabcutgui/build/prueba/color_images/scan_.png"));
+	mImageViewerDialog->showImage(mUi->txtOutputDirectory->text().append(KROUTECOLORDIRECTORY).append(mUi->txtCapture->text()).append(".png"));
 }
 
 void captureToolPage::showDepthImage(){
+	mImageViewerDialog->showImage(mUi->txtOutputDirectory->text().append(KROUTEDEPTHDIRECTORY).append(mUi->txtCapture->text()).append(".png"));
 }
 
 void captureToolPage::showPCD(){
