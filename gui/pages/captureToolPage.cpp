@@ -15,7 +15,8 @@ captureToolPage::captureToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::captureToolPage){
 	mUi->setupUi(this);
-	mImageViewerDialog = new ImageViewerDialog();
+	mImgColorViewer = new ImageViewerDialog();
+	mImgDepthViewer = new ImageViewerDialog();
 	mCaptureToolProcess = new QProcess(this);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbOutput, SIGNAL(clicked()), this, SLOT(setOutputDirectory()));
@@ -76,11 +77,11 @@ void captureToolPage::doCapture(){
 }
 
 void captureToolPage::showColorImage(){
-	mImageViewerDialog->showImage(mUi->txtOutputDirectory->text().append(KROUTECOLORDIRECTORY).append(mUi->txtCapture->text()).append(".png"));
+	mImgColorViewer->showImage(mUi->txtOutputDirectory->text().append(KROUTECOLORDIRECTORY).append(mUi->txtCapture->text()).append(".png"));
 }
 
 void captureToolPage::showDepthImage(){
-	mImageViewerDialog->showImage(mUi->txtOutputDirectory->text().append(KROUTEDEPTHDIRECTORY).append(mUi->txtCapture->text()).append(".png"));
+	mImgDepthViewer->showImage(mUi->txtOutputDirectory->text().append(KROUTEDEPTHDIRECTORY).append(mUi->txtCapture->text()).append(".png"));
 }
 
 void captureToolPage::showPCD(){

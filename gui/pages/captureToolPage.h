@@ -43,7 +43,8 @@ private:
 
 	QProcess *mCaptureToolProcess;
 
-	ImageViewerDialog *mImageViewerDialog;
+	ImageViewerDialog *mImgColorViewer;
+	ImageViewerDialog *mImgDepthViewer;
 
 	static const QString KROUTECOLORDIRECTORY;
 	static const QString KROUTEDEPTHDIRECTORY;
