@@ -23,7 +23,6 @@ ImageViewerDialog::ImageViewerDialog() {
     mScrollArea->setVisible(true);
     mScrollArea->setWidgetResizable(true);
 
-    //resize(QGuiApplication::primaryScreen()->availableSize() * 3 / 5);
 }
 
 void ImageViewerDialog::showImage(const QString& path){
@@ -33,7 +32,6 @@ void ImageViewerDialog::showImage(const QString& path){
 		QMessageBox::information(this, "Image not load", tr("Cannot load image."));
 	}else{
 		mImageLabel->setPixmap(QPixmap::fromImage(image));
-		//imageLabel->resize(imageLabel->pixmap()->size());
 		show();
 	}
 }

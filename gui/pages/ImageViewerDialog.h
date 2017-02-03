@@ -16,7 +16,7 @@
 #include <QMessageBox>
 #include <QScrollArea>
 
-class ImageViewerDialog : QDialog {
+class ImageViewerDialog : public QDialog {
 	Q_OBJECT
 public:
 	ImageViewerDialog();
