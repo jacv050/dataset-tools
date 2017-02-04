@@ -17,6 +17,9 @@ FILE(GLOB GUIPAGESSOURCES "gui/pages/*.cpp")
 FILE(GLOB GCAPTUREHEADERS "capture/*.h*")
 FILE(GLOB GCAPTURESOURCES "capture/*.cpp")
 
+FILE(GLOB GVIEWERHEADERS "3dviewer/*.h*")
+FILE(GLOB GVIEWERSOURCES "3dviewer/*.cpp")
+
 #Python tools
 FILE(COPY ${CMAKE_CURRENT_SOURCE_DIR}/py-pngIndexed/indexPngDataset.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
@@ -38,7 +41,7 @@ find_package( OpenCV REQUIRED )
 
 #Find boost
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.5 COMPONENTS program_options system filesystem regex chrono timer thread)
+find_package(Boost 1.5 COMPONENTS program_options system filesystem regex chrono timer)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS} )
 
@@ -50,3 +53,6 @@ target_link_libraries( main Qt5::Widgets Qt5::Core )
 
 add_executable(capture ${GCAPTUREHEADERS} ${GCAPTURESOURCES})
 target_link_libraries(capture ${PCL_LIBRARIES} ${Boost_LIBRARIES})
+
+add_executable(viewer ${GVIEWERHEADERS} ${GVIEWERSOURCES})
+target_link_libraries(viewer ${PCL_LIBRARIES} ${Boost_LIBRARIES})
