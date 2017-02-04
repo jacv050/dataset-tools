@@ -16,6 +16,7 @@
 #include <QFileDialog>
 #include <QDialog>
 #include "selectObjectDialog.h"
+#include "gui/pages/imageViewerDialog.h"
 
 class labelToolPage : public QWidget{
 	Q_OBJECT
@@ -42,11 +43,14 @@ public slots:
 	void selectObjectMask(QListWidgetItem* item);
 	//Delete all item in listWidget
 	void deleteAllItems();
+	//Show output
+	void showOutput();
 
 private:
 	Ui::labelToolPage *mUi;
 	QProcess *mLabelToolProcess;
 	selectObjectDialog *mSelectObjectDialog;
+	imageViewerDialog *mImageViewer;
 
 	QString mLastDataset;
 	QString mLastOutput;

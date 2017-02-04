@@ -16,6 +16,7 @@ labelToolPage::labelToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::labelToolPage){
 	mUi->setupUi(this);
+	mImageViewer = new imageViewerDialog();
 	mSelectObjectDialog = new selectObjectDialog();
 	mLabelToolProcess = new QProcess(this);
 	mLastOutput = QDir::currentPath() + QDir::separator() + tr("pngIndexed.png");
@@ -32,6 +33,11 @@ mUi(new Ui::labelToolPage){
 	connect(mUi->pbAddMask, SIGNAL(clicked()), this, SLOT(addMask()));
 	connect(mUi->listAddedMasks, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(selectObjectMask(QListWidgetItem*)));
 	connect(mUi->pbDeleteAll, SIGNAL(clicked()), this, SLOT(deleteAllItems()));
+	connect(mUi->pbShowOutput, SIGNAL(clicked()), this, SLOT(showOutput()));
+}
+
+void labelToolPage::showOutput(){
+	mImageViewer->showImage(mUi->txtOutput->text());
 }
 
 void labelToolPage::deleteAllItems(){
@@ -39,6 +45,7 @@ void labelToolPage::deleteAllItems(){
 }
 
 void labelToolPage::readyErrorMsgProcess(){
+	mUi->pbShowOutput->setEnabled(false);
 	QString s("<font color=red>");
 	s.append(tr(mLabelToolProcess->readAllStandardError()));
 	s.append(tr("</font><br><br>"));
@@ -50,6 +57,7 @@ void labelToolPage::readyOutputMsgProcess(){
 	s.append(tr(mLabelToolProcess->readAllStandardOutput()));
 	s.append(tr("</font><br><br>"));
 	mUi->txtOutputProcess->insertHtml(s);
+	mUi->pbShowOutput->setEnabled(true);
 }
 
 void labelToolPage::selectObjectMask(QListWidgetItem* item){
