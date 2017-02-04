@@ -7,9 +7,9 @@
 
 #include <gui/pages/captureToolPage.h>
 
-const QString captureToolPage::KROUTECOLORDIRECTORY = tr("/color_images/scan_");
-const QString captureToolPage::KROUTEDEPTHDIRECTORY = tr("/depth_images/scan_");
-const QString captureToolPage::KROUTEPCDDIRECTORY = tr("/original_clouds/pcd/scan_");
+const QString captureToolPage::KROUTECOLORDIRECTORY = QString(QDir::separator()).append("color_images").append(QDir::separator()).append("scan_");
+const QString captureToolPage::KROUTEDEPTHDIRECTORY = QString(QDir::separator()).append("depth_images").append(QDir::separator()).append("scan_");
+const QString captureToolPage::KROUTEPCDDIRECTORY = QString(QDir::separator()).append("original_clouds").append(QDir::separator()).append("pcd").append(QDir::separator()).append("scan_");
 
 captureToolPage::captureToolPage(QWidget *parent) :
 QWidget(parent),
