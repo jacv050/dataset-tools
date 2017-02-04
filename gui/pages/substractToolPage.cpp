@@ -14,6 +14,7 @@ substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
 mUi(new Ui::substractToolPage){
 	mUi->setupUi(this);
+	mImageViewer = new imageViewerDialog();
 	mUi->sbHsvchannel->setEnabled(mUi->cbSubstractmode->isChecked());
 	mImageSubstractProcess = new QProcess(this);
 	mLastMaskDestiny = QDir::currentPath() + QDir::separator() + tr("finalimage.png");
@@ -26,6 +27,11 @@ mUi(new Ui::substractToolPage){
 	connect(mUi->cbSubstractmode, SIGNAL(clicked()), this, SLOT(substractModeChanged()));
 	connect(mUi->pbNewObject, SIGNAL(clicked()), this, SLOT(setNewObject()));
 	connect(mImageSubstractProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readyOutputMsgProcess()));
+	connect(mUi->pbShowOutput, SIGNAL(clicked()), this, SLOT(showOutput()));
+}
+
+void substractToolPage::showOutput(){
+	mImageViewer->showImage(mUi->txtMaskDestiny->text());
 }
 
 void substractToolPage::setNewObject(){
@@ -94,7 +100,8 @@ void substractToolPage::setMaskNameDestiny(){
 
 void substractToolPage::readyOutputMsgProcess(){
 	QString s = tr(mImageSubstractProcess->readAllStandardOutput());
-	//mUi->txtOutputProcess->setPlainText(s);
+	if(s.contains("saved"))
+		mUi->pbShowOutput->setEnabled(true);
 	mUi->txtOutputProcess->appendPlainText(s);
 }
 

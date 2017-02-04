@@ -17,6 +17,7 @@
 
 #include "ui_substractToolPage.h"
 #include "gui/gui.h"
+#include "gui/pages/imageViewerDialog.h"
 #include <vector>
 
 class substractToolPage : public QWidget {
@@ -42,6 +43,8 @@ public slots:
 	void substractModeChanged();
 	//Event to add new object swaping background and object
 	void setNewObject();
+	//Show output
+	void showOutput();
 
 private:
 	Ui::substractToolPage *mUi;
@@ -51,6 +54,8 @@ private:
 	QString mLastPageObject;
 	QString mLastPageNewObject;
 	QString mLastMaskDestiny;
+
+	imageViewerDialog *mImageViewer;
 
 	static const QString KIMAGEFORMATS;
 	static const QString KOUTPUTIMAGEFORMATS;

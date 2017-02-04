@@ -290,6 +290,22 @@ Uncheked substract object with images in gray scale</string>
     <string>New Object</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pbShowOutput">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>290</y>
+     <width>91</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ShowOutput</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
