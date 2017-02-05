@@ -42,6 +42,7 @@ private:
 	QString mLastOutputDirectory;
 
 	QProcess *mCaptureToolProcess;
+	QProcess *m3dViewer;
 
 	imageViewerDialog *mImgColorViewer;
 	imageViewerDialog *mImgDepthViewer;

@@ -17,6 +17,7 @@ mUi(new Ui::captureToolPage){
 	mUi->setupUi(this);
 	mImgColorViewer = new imageViewerDialog();
 	mImgDepthViewer = new imageViewerDialog();
+	m3dViewer = new QProcess(this);
 	mCaptureToolProcess = new QProcess(this);
 	connect(mUi->pbReturnMainPage, SIGNAL(clicked()), this, SLOT(goMainPage()));
 	connect(mUi->pbOutput, SIGNAL(clicked()), this, SLOT(setOutputDirectory()));
@@ -85,7 +86,15 @@ void captureToolPage::showDepthImage(){
 }
 
 void captureToolPage::showPCD(){
+	QStringList arguments;
+	arguments << "--n";
+	arguments << mUi->txtOutputDirectory->text().append(KROUTEPCDDIRECTORY).append(mUi->txtCapture->text()).append(".pcd");
 
+	m3dViewer->start(QDir::current().absoluteFilePath("viewer"), arguments);
+	m3dViewer->waitForFinished();
+	if(m3dViewer->readAllStandardError().length() > 0){
+		QMessageBox::information(this, "Error", "Cannot open pcd file");
+	}
 }
 
 void captureToolPage::initTool(){
