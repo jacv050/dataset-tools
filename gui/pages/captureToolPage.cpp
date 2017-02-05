@@ -93,7 +93,7 @@ void captureToolPage::showPCD(){
 	m3dViewer->start(QDir::current().absoluteFilePath("viewer"), arguments);
 	m3dViewer->waitForFinished();
 	if(m3dViewer->readAllStandardError().length() > 0){
-		QMessageBox::information(this, "Error", "Cannot open pcd file");
+		QMessageBox::information(this, "Error", "Error openning pcd file");
 	}
 }
 
