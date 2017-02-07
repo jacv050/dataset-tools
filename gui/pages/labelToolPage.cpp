@@ -7,9 +7,9 @@
 
 #include <gui/pages/labelToolPage.h>
 
-const QString labelToolPage::KIMAGEFORMATS = tr("Images (*.png )");
-const QString labelToolPage::KINPUTFORMATS = tr("Images (*.csv *.txt)");
-const QString labelToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
+const QString labelToolPage::KIMAGEFORMATS("Images (*.png )");
+const QString labelToolPage::KINPUTFORMATS("Images (*.csv *.txt)");
+const QString labelToolPage::KOUTPUTIMAGEFORMATS("Images (*.png)");
 const char labelToolPage::KSEPARATOR=':';
 
 labelToolPage::labelToolPage(QWidget *parent) :

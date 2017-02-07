@@ -7,8 +7,8 @@
 
 #include <gui/pages/substractToolPage.h>
 
-const QString substractToolPage::KIMAGEFORMATS = tr("Images (*.png *.jpg)");
-const QString substractToolPage::KOUTPUTIMAGEFORMATS = tr("Images (*.png)");
+const QString substractToolPage::KIMAGEFORMATS("Images (*.png *.jpg)");
+const QString substractToolPage::KOUTPUTIMAGEFORMATS("Images (*.png)");
 
 substractToolPage::substractToolPage(QWidget *parent) :
 QWidget(parent),
