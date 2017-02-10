@@ -12,16 +12,18 @@
 #include <pcl/visualization/boost.h>
 //#include <pcl/io/image.h>
 //#include <pcl/io/image_depth.h>
-#include <pcl/io/openni_camera/openni_depth_image.h>
-#include <pcl/io/openni_camera/openni_image.h>
+//#include <pcl/io/openni_camera/openni_depth_image.h>
+//#include <pcl/io/openni_camera/openni_image.h>
+#include <OpenNI.h>
+#include <PrimeSense.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
 #include <pcl/io/png_io.h>
 
-#include <pcl/io/oni_grabber.h>
+//#include <pcl/io/oni_grabber.h>
 #include <pcl/io/pcd_grabber.h>
 
-#include <pcl/io/openni_grabber.h>
+//#include <pcl/io/openni_grabber.h>
 #include <pcl/io/openni2_grabber.h>
 #include <boost/timer/timer.hpp>
 

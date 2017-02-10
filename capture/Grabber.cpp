@@ -129,7 +129,8 @@ pcl::PointCloud<pcl::PointXYZRGB>::Ptr Grabber::convertToXYZRGBPointCloud (
 	  int centerY = (depth_height_ >> 1);
 
 	  //register const XnDepthPixel* depth_map = depth_image->getDepthMetaData().Data();
-	  register const XnDepthPixel* depth_map = depth_image->getData();
+	  //register const XnDepthPixel* depth_map = depth_image->getData();
+	  register const unsigned short* depth_map = depth_image->getData();
 	  if (depth_image->getWidth () != depth_width_ || depth_image->getHeight() != depth_height_)
 	  {
 		static unsigned buffer_size = 0;
