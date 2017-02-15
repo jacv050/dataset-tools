@@ -60,7 +60,11 @@ def main(argv):
         data = dataset[key]
         im = Image.open(nameFile).convert('P')
         mask = np.array(im)
-        indexed[mask > max_colour/2] = data[0]
+        if (len(mask[mask > max_colour/2]) > 0):
+            indexed[mask > max_colour/2] = data[0]
+        else:
+            indexed[mask > 0.5] = data[0]
+
         map_palette[data[0]*3 : (data[0]+1)*3] = data[1]
         
     imfile = Image.fromarray(indexed)
